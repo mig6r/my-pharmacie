@@ -9,13 +9,24 @@
 namespace App\Controller;
 
 
+use App\Repository\MedicamentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-public function index(): Response
+    /**
+     * @Route("/", name="home")
+     * @param MedicamentRepository $repository
+     * @return Response
+     */
+public function index(MedicamentRepository $repository): Response
 {
-    return $this->render('pages/home.html.twig');
+    $medicament = $repository->findLatest();
+    return $this->render('pages/home.html.twig', [
+        "current_menu" => "home",
+        "medicaments" => $medicament
+    ]);
 }
 }
