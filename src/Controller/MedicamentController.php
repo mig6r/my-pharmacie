@@ -53,9 +53,13 @@ return $this->render("medicaments/index.html.twig", [
      * @Route("/medicaments/{slug}-{id}", name="medicament.detail", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-public function detail($slug, $id): Response
+public function detail($slug, Medicament $medicament): Response
 {
-    $medicament = $this->repository->find($id);
+    //$medicament = $this->repository->find($id);
+    ///*A la place de mettre $id en argument et de faire une recherche avec la méthode find comme ci-dessus,
+    /// on peut faire une injection de l'entity Medicament, etant donné que symfony trouve un id, symfony va faire
+    /// la recherche à notre place
+
     if($medicament->getSlug() !== $slug){
        return $this->redirectToRoute("medicament.detail", [
             "id" => $medicament->getId(),
@@ -68,5 +72,7 @@ return $this->render("medicaments/detail.html.twig", [
     "slug" => $slug
 ]);
 }
+
+
 
 }

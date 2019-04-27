@@ -52,6 +52,11 @@ class Medicament
      */
     private $enable = true;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $commentaires;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -148,6 +153,18 @@ class Medicament
     public function setEnable(bool $enable): self
     {
         $this->enable = $enable;
+
+        return $this;
+    }
+
+    public function getCommentaires(): ?string
+    {
+        return $this->commentaires;
+    }
+
+    public function setCommentaires(?string $commentaires): self
+    {
+        $this->commentaires = $commentaires;
 
         return $this;
     }
