@@ -19,14 +19,15 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      * @param MedicamentRepository $repository
-     * @return Response
+     *
      */
-public function index(MedicamentRepository $repository): Response
+public function index(MedicamentRepository $repository)
 {
     $medicament = $repository->findLatest();
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",
         "medicaments" => $medicament
     ]);
+
 }
 }

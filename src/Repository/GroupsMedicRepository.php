@@ -19,6 +19,24 @@ class GroupsMedicRepository extends ServiceEntityRepository
         parent::__construct($registry, GroupsMedic::class);
     }
 
+
+    /**
+     * @return array
+     */
+    public function toChoices(): array
+    {
+        $choices =  $this->createQueryBuilder('t')
+            ->select('t.id, t.Name')
+            ->orderBy('t.Name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+        $arr = [];
+        foreach ($choices as $k => $v) {
+            $arr[$v["Name"]] = $v["id"];
+        }
+        return $arr;
+    }
     // /**
     //  * @return GroupsMedic[] Returns an array of GroupsMedic objects
     //  */
