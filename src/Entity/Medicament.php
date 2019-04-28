@@ -4,12 +4,20 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MedicamentRepository")
  */
 class Medicament
 {
+
+    const TYPES = [
+        0 => 'Non défini',
+        1 => 'Antibiotique',
+        2 => 'Divers',
+        3 => 'Soin du corps'
+    ];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,6 +26,12 @@ class Medicament
     private $id;
 
     /**
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 50,
+     *     minMessage = "{{ limit }} caractères minimum pour le titre du médicament)",
+     *     maxMessage = "{{ limit }} caractères maximum pour le nom du médicament"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $name;

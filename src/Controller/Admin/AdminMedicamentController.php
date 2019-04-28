@@ -27,6 +27,7 @@ class AdminMedicamentController extends AbstractController
     public function __construct(MedicamentRepository $repository, ObjectManager $em)
     {
         $this->repository = $repository;
+        $this->em = $em;
     }
 
     /**
@@ -54,6 +55,7 @@ return $this->render("admin/medicaments/index.html.twig",  [
         if ($form->isSubmitted() && $form->isValid()){
             $this->em->persist($medicament);
             $this->em->flush();
+            $this->addFlash('success', 'Le médicament a bien été créé');
             return $this->redirectToRoute("admin.medicaments.index");
         }
 
@@ -64,7 +66,7 @@ return $this->render("admin/medicaments/index.html.twig",  [
     }
 
     /**
-     * @Route("/admin/medicamant/{id}", name="admin.medicaments.edit")
+     * @Route("/admin/medicament/{id}", name="admin.medicaments.edit", methods="GET|POST")
      * @param Medicament $medicament
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -75,12 +77,27 @@ return $this->render("admin/medicaments/index.html.twig",  [
 
         if ($form->isSubmitted() && $form->isValid()){
             $this->em->flush();
+            $this->addFlash('success', 'Le médicament a bien été modifié');
             return $this->redirectToRoute("admin.medicaments.index");
         }
         return $this->render("admin/medicaments/edit.html.twig", [
             "medicament" => $medicament,
             "form" => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/medicament/{id}", name="admin.medicaments.delete", methods="DELETE")
+     * @param Medicament $medicament
+     */
+    public function delete(Medicament $medicament, Request  $request)
+    {
+        if($this->isCsrfTokenValid('delete' . $medicament->getId(), $request->get('_token'))){
+        $this->em->remove($medicament);
+        $this->em->flush();
+            $this->addFlash('success', 'Le médicament a bien été supprimé');
+        }
+        return $this->redirectToRoute('admin.medicaments.index');
     }
 
 }
