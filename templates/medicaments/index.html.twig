@@ -1,5 +1,55 @@
-{%  extends "base.html.twig" %}
+{% extends "base.html.twig" %}
+
 {% block title "Liste des médicaments" %}
 {% block body %}
-    Teset de page médicaments
+
+    <div class="container mt-4 ">
+        {{ form_start(form) }}
+        <div class="form-row ">
+            <div class="col-md-4">
+
+                {{ form_label(form.catMedic, null, {
+                    'label_attr': {'class': 'sr-only'}
+                }) }}
+                {{ form_widget(form.catMedic) }}
+
+            </div>
+            <div class="col-md-4">
+                {{ form_label(form.groupMedic, null, {
+                    'label_attr': {'class': 'sr-only'}
+                }) }}
+                {{ form_widget(form.groupMedic) }}
+            </div>
+            <div class="col-md-4">
+                <div class="form_group">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+
+    <div class="container mt-4">
+        <h1>Liste des médicaments</h1>
+
+
+        <div class="row">
+
+
+            {% for element in medicaments %}
+
+                <div class="col-md-4">
+                    {% include 'medicaments/_medicament.html.twig' %}
+                </div>
+
+            {% endfor %}
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(medicaments) }}
+        </div>
+
+    </div>
+
+
 {% endblock %}

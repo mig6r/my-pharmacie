@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Medicament;
+use App\Entity\MedicamentFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -21,13 +23,31 @@ class MedicamentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Medicament[]
+     * @return Query
      */
-    public function findAllEnable(): array
+    public function findAllEnableQuery(MedicamentFilter $search): Query
     {
-        return $this->findEnableQuery()
-            ->getQuery()
-            ->getResult();
+        $query = $this->findEnableQuery();
+
+
+        if ($search->getCatMedic()){
+
+            $query = $query
+                ->andwhere('m.id_cat = :catmedic')
+                ->setParameter('catmedic', $search->getCatMedic());
+            $where="andwhere";
+
+        }
+
+
+        if ($search->getGroupMedic()){
+
+            $query = $query
+                ->andwhere('m.id_group = :groupmedic')
+                ->setParameter('groupmedic', $search->getGroupMedic());
+
+        }
+            return $query->getQuery();
     }
 
     /**

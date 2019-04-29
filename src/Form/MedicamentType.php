@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\GroupsMedic;
 use App\Entity\Medicament;
+use App\Repository\CatMedicamentsRepository;
 use App\Repository\GroupsMedicRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,10 +18,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class MedicamentType extends AbstractType
 {
     private $gm;
+    private $cm;
 
-    public function __construct(GroupsMedicRepository $gm)
+    public function __construct(GroupsMedicRepository $gm, CatMedicamentsRepository $cm)
     {
         $this->gm = $gm;
+        $this->cm = $cm;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,8 +36,11 @@ class MedicamentType extends AbstractType
 
             //->add('picture', FileType::class)
                ->add ('id_group', ChoiceType::class, [
-                    'choices' => $this->gm->toChoices()
+                    'choices' => $this->gm->getChoices()
             ])
+        ->add('id_cat', ChoiceType::class, [
+            'choices' => $this->cm->getChoices()
+        ])
           /* ->add('id_group', EntityType::class, [
                 'class' => GroupsMedic::class,
                 'query_builder' => function (EntityRepository $er) {
