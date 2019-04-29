@@ -71,6 +71,11 @@ class Medicament
      */
     private $commentaires;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_cat;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -179,6 +184,18 @@ class Medicament
     public function setCommentaires(?string $commentaires): self
     {
         $this->commentaires = $commentaires;
+
+        return $this;
+    }
+
+    public function getIdCat(): ?int
+    {
+        return $this->id_cat;
+    }
+
+    public function setIdCat(int $id_cat): self
+    {
+        $this->id_cat = $id_cat;
 
         return $this;
     }

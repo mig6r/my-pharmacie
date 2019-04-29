@@ -23,11 +23,11 @@ class GroupsMedicRepository extends ServiceEntityRepository
     /**
      * @return array
      */
-    public function toChoices(): array
+    public function getChoices(): array
     {
-        $choices =  $this->createQueryBuilder('t')
-            ->select('t.id, t.Name')
-            ->orderBy('t.Name', 'ASC')
+        $choices =  $this->createQueryBuilder('g')
+            ->select('g.id, g.Name')
+            ->orderBy('g.Name', 'ASC')
             ->getQuery()
             ->getResult()
         ;

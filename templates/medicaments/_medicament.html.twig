@@ -1,0 +1,8 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="{{ path('medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
+        </h5>
+        <p class="card-text">{{ element.description }}</p>
+    </div>
+</div>

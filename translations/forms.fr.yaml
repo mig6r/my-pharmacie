@@ -1,4 +1,5 @@
 Name: Nom du médicament
 Picture: Image
 Enable: Actif
-Id group: Catégorie
+Id group: Publique
+Id cat: Classe
