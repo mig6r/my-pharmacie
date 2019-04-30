@@ -1095,107 +1095,113 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="271" parent="250" name="PRIMARY">
+    <column id="271" parent="250" name="updated_at">
+      <Position>11</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="272" parent="250" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="272" parent="251" name="medicament_id">
+    <column id="273" parent="251" name="medicament_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="251" name="symptome_id">
+    <column id="274" parent="251" name="symptome_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="274" parent="251" name="IDX_D6D7ABEEAB0D61F7">
+    <index id="275" parent="251" name="IDX_D6D7ABEEAB0D61F7">
       <ColNames>medicament_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="275" parent="251" name="IDX_D6D7ABEE12B83D77">
+    <index id="276" parent="251" name="IDX_D6D7ABEE12B83D77">
       <ColNames>symptome_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="276" parent="251" name="PRIMARY">
+    <key id="277" parent="251" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>medicament_id
 symptome_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="277" parent="251" name="FK_D6D7ABEEAB0D61F7">
+    <foreign-key id="278" parent="251" name="FK_D6D7ABEEAB0D61F7">
       <ColNames>medicament_id</ColNames>
       <RefSchemaName>my-pharmacie</RefSchemaName>
       <RefTableName>medicament</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="278" parent="251" name="FK_D6D7ABEE12B83D77">
+    <foreign-key id="279" parent="251" name="FK_D6D7ABEE12B83D77">
       <ColNames>symptome_id</ColNames>
       <RefSchemaName>my-pharmacie</RefSchemaName>
       <RefTableName>symptome</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="279" parent="252" name="version">
+    <column id="280" parent="252" name="version">
       <Position>1</Position>
       <DataType>varchar(14)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="252" name="executed_at">
+    <column id="281" parent="252" name="executed_at">
       <Position>2</Position>
       <Comment>(DC2Type:datetime_immutable)</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="281" parent="252" name="PRIMARY">
+    <key id="282" parent="252" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="282" parent="253" name="id">
+    <column id="283" parent="253" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="253" name="name">
+    <column id="284" parent="253" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="284" parent="253" name="PRIMARY">
+    <key id="285" parent="253" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="285" parent="254" name="id">
+    <column id="286" parent="254" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="254" name="username">
+    <column id="287" parent="254" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="254" name="password">
+    <column id="288" parent="254" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="288" parent="254" name="PRIMARY">
+    <key id="289" parent="254" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

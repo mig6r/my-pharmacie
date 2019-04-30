@@ -36,6 +36,11 @@ class MedicamentType extends AbstractType
 
 
             //->add('picture', FileType::class)
+                ->add('imageFile', FileType::class, [
+                  'required' => false
+            ])
+
+
                ->add ('id_group', ChoiceType::class, [
                     'choices' => $this->gm->getChoices()
             ])
@@ -57,7 +62,8 @@ class MedicamentType extends AbstractType
             ->add('symptomes', EntityType::class, [
                 'class' => Symptome::class,
                 'choice_label' => 'name',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ])
         ;
     }
