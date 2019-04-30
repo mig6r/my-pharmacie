@@ -6,21 +6,19 @@
     <div class="container mt-4 ">
         {{ form_start(form) }}
         <div class="form-row ">
-            <div class="col-md-4">
+            <div class="col">
 
-                {{ form_label(form.catMedic, null, {
-                    'label_attr': {'class': 'sr-only'}
-                }) }}
-                {{ form_widget(form.catMedic) }}
+                {{ form_row(form.catMedic) }}
 
             </div>
-            <div class="col-md-4">
-                {{ form_label(form.groupMedic, null, {
-                    'label_attr': {'class': 'sr-only'}
-                }) }}
-                {{ form_widget(form.groupMedic) }}
+            <div class="col">
+                {{ form_row(form.groupMedic) }}
             </div>
-            <div class="col-md-4">
+
+            <div class="col">
+                {{ form_row(form.symptomes) }}
+            </div>
+            <div class="col">
                 <div class="form_group">
                     <button type="submit" class="btn btn-primary">Filtrer</button>
                 </div>

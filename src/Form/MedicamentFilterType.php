@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\MedicamentFilter;
+use App\Entity\Symptome;
 use App\Repository\CatMedicamentsRepository;
 use App\Repository\GroupsMedicRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -27,7 +29,7 @@ class MedicamentFilterType extends AbstractType
         $builder
             ->add('catMedic', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Catégorie',
+                'label' => false,
                 'choices' => $this->cm->getChoices(),
                 'placeholder' => 'Toutes les catégories'
 
@@ -35,9 +37,18 @@ class MedicamentFilterType extends AbstractType
             ])
             ->add('groupMedic', ChoiceType::class, [
         'required' => false,
-        'label' => 'Publique',
+        'label' => false,
         'choices' => $this->gm->getChoices(),
         'placeholder' => 'Tout les groupes'
+
+    ])
+        ->add('symptomes', EntityType::class, [
+            'required' => false,
+            'label' => false,
+            'class' => Symptome::class,
+            'choice_label' => 'name',
+            'multiple' => true,
+            'placeholder' => 'Symptomes'
 
     ]);
     }

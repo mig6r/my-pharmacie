@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -76,9 +78,15 @@ class Medicament
      */
     private $id_cat;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Symptome", inversedBy="medicaments")
+     */
+    private $symptomes;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->symptomes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +204,32 @@ class Medicament
     public function setIdCat(int $id_cat): self
     {
         $this->id_cat = $id_cat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|symptome[]
+     */
+    public function getSymptomes(): Collection
+    {
+        return $this->symptomes;
+    }
+
+    public function addSymptome(symptome $symptome): self
+    {
+        if (!$this->symptomes->contains($symptome)) {
+            $this->symptomes[] = $symptome;
+        }
+
+        return $this;
+    }
+
+    public function removeSymptome(symptome $symptome): self
+    {
+        if ($this->symptomes->contains($symptome)) {
+            $this->symptomes->removeElement($symptome);
+        }
 
         return $this;
     }

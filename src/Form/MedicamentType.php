@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\GroupsMedic;
 use App\Entity\Medicament;
+use App\Entity\Symptome;
 use App\Repository\CatMedicamentsRepository;
 use App\Repository\GroupsMedicRepository;
 use Doctrine\ORM\EntityRepository;
@@ -53,6 +54,11 @@ class MedicamentType extends AbstractType
             ])*/
             ->add('enable')
             ->add('commentaires')
+            ->add('symptomes', EntityType::class, [
+                'class' => Symptome::class,
+                'choice_label' => 'name',
+                'multiple' => true
+            ])
         ;
     }
 
