@@ -9,6 +9,8 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class MedicamentFilter
 {
     /**
@@ -20,6 +22,16 @@ class MedicamentFilter
      * @var int|null
      */
     private $groupMedic;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $symptomes;
+
+    public function __construct()
+    {
+        $this->symptomes = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -51,6 +63,22 @@ class MedicamentFilter
     public function setGroupMedic(int $groupMedic): void
     {
         $this->groupMedic = $groupMedic;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSymptomes(): ArrayCollection
+    {
+        return $this->symptomes;
+    }
+
+    /**
+     * @param ArrayCollection $symptomes
+     */
+    public function setSymptomes(ArrayCollection $symptomes): void
+    {
+        $this->symptomes = $symptomes;
     }
 
 

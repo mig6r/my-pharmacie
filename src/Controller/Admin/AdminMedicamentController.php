@@ -10,6 +10,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Medicament;
+use App\Entity\Symptome;
 use App\Form\MedicamentType;
 use App\Repository\MedicamentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -72,6 +73,8 @@ return $this->render("admin/medicaments/index.html.twig",  [
      */
     public function edit(Medicament $medicament,Request $request)
     {
+
+
         $form = $this->createForm(MedicamentType::class, $medicament);
         $form->handleRequest($request);
 

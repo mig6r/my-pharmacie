@@ -1,0 +1,17 @@
+{%  extends "base.html.twig" %}
+
+{%  block title %}Edition : {{ symptome.name }}{% endblock %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1>Edition du symptome {{ symptome.name }}</h1>
+
+        {{ include('admin/symptomes/_form.html.twig', {form: form, button: 'Editer'}) }}
+
+    </div>
+
+
+{% endblock %}
+
+
