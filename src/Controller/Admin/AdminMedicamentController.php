@@ -101,7 +101,6 @@ return $this->render("admin/medicaments/index.html.twig",  [
         $this->em->flush();
             $this->addFlash('success', 'Le médicament a bien été supprimé');
         }
-        return $this->redirectToRoute('admin.medicaments.index');
     }
 
 }
