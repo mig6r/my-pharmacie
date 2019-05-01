@@ -62,7 +62,8 @@ return $this->render("admin/medicaments/index.html.twig",  [
 
         return $this->render("admin/medicaments/new.html.twig", [
             "medicament" => $medicament,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "current_menu" => "admin_medicaments",
         ]);
     }
 
@@ -86,7 +87,8 @@ return $this->render("admin/medicaments/index.html.twig",  [
         }
         return $this->render("admin/medicaments/edit.html.twig", [
             "medicament" => $medicament,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "current_menu" => "admin_medicaments",
         ]);
     }
 

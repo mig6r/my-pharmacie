@@ -22,6 +22,7 @@ class AdminSymptomeController extends AbstractController
     {
         return $this->render('admin/symptomes/index.html.twig', [
             'symptomes' => $symptomeRepository->findAll(),
+            "current_menu" => "admin_symptomes"
         ]);
     }
 
@@ -77,6 +78,7 @@ class AdminSymptomeController extends AbstractController
         return $this->render('admin/symptomes/edit.html.twig', [
             'symptome' => $symptome,
             'form' => $form->createView(),
+            "current_menu" => "admin_symptomes"
         ]);
     }
 
