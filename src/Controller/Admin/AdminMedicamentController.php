@@ -16,6 +16,7 @@ use App\Repository\MedicamentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminMedicamentController extends AbstractController
@@ -33,7 +34,7 @@ class AdminMedicamentController extends AbstractController
 
     /**
      * @Route("/admin", name="admin.medicaments.index")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index()
     {
@@ -103,6 +104,7 @@ return $this->render("admin/medicaments/index.html.twig",  [
         $this->em->flush();
             $this->addFlash('success', 'Le médicament a bien été supprimé');
         }
+        return $this->redirectToRoute('admin.medicaments.index');
     }
 
 }

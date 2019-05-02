@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6">
                 {%  if medicament.picture %}
-                    <img src="{{ vich_uploader_asset(medicament, 'imageFile') | imagine_filter('mediumtest')}}" alt="card-img-top" style="width: 100%; height:auto;">
+                    <img src="{{ vich_uploader_asset(medicament, 'imageFile') | imagine_filter('medium')}}" alt="card-img-top" style="width: 100%; height:auto;">
                 {% else %}
                     <img src="{{ '/images/medicaments/empty.jpg' | imagine_filter('thumb')}}" alt="card-img-top" style="width: 100%; height:auto;">
                 {% endif %}

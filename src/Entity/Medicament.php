@@ -99,7 +99,8 @@ class Medicament
     private $symptomes;
 
     /**
-     * @ORM\Column(type="datetime")
+     *
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
 
@@ -282,7 +283,7 @@ class Medicament
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 

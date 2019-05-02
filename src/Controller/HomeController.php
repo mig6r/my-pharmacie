@@ -13,7 +13,6 @@ use App\Repository\MedicamentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class HomeController extends AbstractController
 {
@@ -28,8 +27,7 @@ public function index(MedicamentRepository $repository)
     $medicament = $repository->findLatest();
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",
-        "medicaments" => $medicament,
-
+        "medicaments" => $medicament
     ]);
 
 }

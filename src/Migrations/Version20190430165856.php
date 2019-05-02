@@ -22,7 +22,7 @@ final class Version20190430165856 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE medicament ADD updated_at DATETIME NOT NULL');
+        $this->addSql('ALTER TABLE medicament ADD updated_at DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
