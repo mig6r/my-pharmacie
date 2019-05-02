@@ -22,14 +22,14 @@ class HomeController extends AbstractController
      * @param MedicamentRepository $repository
      *
      */
-public function index(MedicamentRepository $repository, UserInterface $user)
+public function index(MedicamentRepository $repository)
 {
-    $usertest = $user->getRoles();
+
     $medicament = $repository->findLatest();
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",
         "medicaments" => $medicament,
-        "user" => $usertest
+
     ]);
 
 }
