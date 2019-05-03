@@ -21,7 +21,7 @@ class CatMedicamentsRepository extends ServiceEntityRepository
 
     /**
      * @return array
-     */
+
     public function getChoices(): array
     {
 
@@ -37,7 +37,7 @@ class CatMedicamentsRepository extends ServiceEntityRepository
         }
         return $arr;
     }
-
+*/
 
 
     // /**
