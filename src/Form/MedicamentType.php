@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CatMedicaments;
 use App\Entity\GroupsMedic;
 use App\Entity\Medicament;
 use App\Entity\Symptome;
@@ -18,14 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MedicamentType extends AbstractType
 {
-    private $gm;
-    private $cm;
 
-    public function __construct(GroupsMedicRepository $gm, CatMedicamentsRepository $cm)
-    {
-        $this->gm = $gm;
-        $this->cm = $cm;
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -41,12 +35,10 @@ class MedicamentType extends AbstractType
             ])
 
 
-               ->add ('id_group', ChoiceType::class, [
-                    'choices' => $this->gm->getChoices()
-            ])
-        ->add('id_cat', ChoiceType::class, [
-            'choices' => $this->cm->getChoices()
-        ])
+
+
+
+
           /* ->add('id_group', EntityType::class, [
                 'class' => GroupsMedic::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -59,6 +51,18 @@ class MedicamentType extends AbstractType
             ])*/
             ->add('enable')
             ->add('commentaires')
+            ->add('catMedicament', EntityType::class, [
+                'class' => CatMedicaments::class,
+                'choice_label' => 'name'
+
+            ])
+
+            ->add('GroupMedicament', EntityType::class, [
+                'class' => GroupsMedic::class,
+                'choice_label' => 'name',
+                'required' => true
+            ])
+
             ->add('symptomes', EntityType::class, [
                 'class' => Symptome::class,
                 'choice_label' => 'name',

@@ -62,10 +62,6 @@ class Medicament
      */
     private $notice;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true, options={"default": 1})
-     */
-    private $id_group;
 
     /**
      * @var string|null
@@ -88,10 +84,6 @@ class Medicament
      */
     private $commentaires;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_cat;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Symptome", inversedBy="medicaments")
@@ -103,6 +95,18 @@ class Medicament
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CatMedicaments", inversedBy="medicament")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $catMedicament;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\GroupsMedic", inversedBy="medicaments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $GroupMedicament;
 
     public function __construct()
     {
@@ -157,17 +161,6 @@ class Medicament
         return $this;
     }
 
-    public function getIdGroup(): ?int
-    {
-        return $this->id_group;
-    }
-
-    public function setIdGroup(?int $id_group): self
-    {
-        $this->id_group = $id_group;
-
-        return $this;
-    }
 
     public function getPicture(): ?string
     {
@@ -213,18 +206,6 @@ class Medicament
     public function setCommentaires(?string $commentaires): self
     {
         $this->commentaires = $commentaires;
-
-        return $this;
-    }
-
-    public function getIdCat(): ?int
-    {
-        return $this->id_cat;
-    }
-
-    public function setIdCat(int $id_cat): self
-    {
-        $this->id_cat = $id_cat;
 
         return $this;
     }
@@ -286,6 +267,30 @@ class Medicament
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCatMedicament(): ?CatMedicaments
+    {
+        return $this->catMedicament;
+    }
+
+    public function setCatMedicament(?CatMedicaments $catMedicament): self
+    {
+        $this->catMedicament = $catMedicament;
+
+        return $this;
+    }
+
+    public function getGroupMedicament(): ?GroupsMedic
+    {
+        return $this->GroupMedicament;
+    }
+
+    public function setGroupMedicament(?GroupsMedic $GroupMedicament): self
+    {
+        $this->GroupMedicament = $GroupMedicament;
 
         return $this;
     }

@@ -2,46 +2,37 @@
 
 namespace App\Form;
 
+use App\Entity\CatMedicaments;
+use App\Entity\GroupsMedic;
 use App\Entity\MedicamentFilter;
 use App\Entity\Symptome;
-use App\Repository\CatMedicamentsRepository;
-use App\Repository\GroupsMedicRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MedicamentFilterType extends AbstractType
 {
-    private $gm;
-    private $cm;
-
-    public function __construct(GroupsMedicRepository $gm, CatMedicamentsRepository $cm)
-    {
-        $this->gm = $gm;
-        $this->cm = $cm;
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('catMedic', ChoiceType::class, [
+            ->add('catMedic', EntityType::class, [
                 'required' => false,
                 'label' => false,
-                'choices' => $this->cm->getChoices(),
-                'placeholder' => 'Toutes les catégories'
-
-
+                'class' => CatMedicaments::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Catégorie'
             ])
-            ->add('groupMedic', ChoiceType::class, [
-        'required' => false,
-        'label' => false,
-        'choices' => $this->gm->getChoices(),
-        'placeholder' => 'Tout les groupes'
 
-    ])
+            ->add('groupMedic', EntityType::class, [
+                'required' => false,
+                'label' => false,
+                'class' => GroupsMedic::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Public visé'
+            ])
+
         ->add('symptomes', EntityType::class, [
             'required' => false,
             'label' => false,
