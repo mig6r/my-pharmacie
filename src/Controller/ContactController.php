@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Contact;
+use App\Entity\User;
 use App\Form\ContactType;
+use App\Form\UserType;
 use App\Notification\ContactNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,5 +44,7 @@ class ContactController extends AbstractController
         ]);
 
     }
+
+
 
 }

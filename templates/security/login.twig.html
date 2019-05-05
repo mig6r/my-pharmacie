@@ -10,7 +10,16 @@
         {{ error.messageKey | trans(error.messagedata, 'security') }}
     </div>
     {% endif %}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
 <form action="{{ path('login')}}" method="post">
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
 
     <div class="form-group">
         <label for="username=">Nom d'utilisateur</label>

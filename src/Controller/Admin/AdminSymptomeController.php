@@ -21,7 +21,7 @@ class AdminSymptomeController extends AbstractController
     public function index(SymptomeRepository $symptomeRepository): Response
     {
         return $this->render('admin/symptomes/index.html.twig', [
-            'symptomes' => $symptomeRepository->findAll(),
+            'symptomes' => $symptomeRepository->findAllForUser($this->getUser()->getFamille()),
             "current_menu" => "admin_symptomes"
         ]);
     }
@@ -32,7 +32,9 @@ class AdminSymptomeController extends AbstractController
     public function new(Request $request): Response
     {
         $symptome = new Symptome();
-        $form = $this->createForm(SymptomeType::class, $symptome);
+        $form = $this->createForm(SymptomeType::class, $symptome, [
+            'famille' => $this->getUser()->getFamille()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,7 +66,9 @@ class AdminSymptomeController extends AbstractController
      */
     public function edit(Request $request, Symptome $symptome): Response
     {
-        $form = $this->createForm(SymptomeType::class, $symptome);
+        $form = $this->createForm(SymptomeType::class, $symptome, [
+            'famille' => $this->getUser()->getFamille()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

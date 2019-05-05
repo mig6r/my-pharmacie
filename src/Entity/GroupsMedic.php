@@ -21,12 +21,18 @@ class GroupsMedic
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medicament", mappedBy="GroupMedicament")
      */
     private $medicaments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Famille", inversedBy="groupsMedics")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $famille;
 
     public function __construct()
     {
@@ -40,12 +46,12 @@ class GroupsMedic
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
@@ -77,6 +83,18 @@ class GroupsMedic
                 $medicament->setGroupMedicament(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): self
+    {
+        $this->famille = $famille;
 
         return $this;
     }

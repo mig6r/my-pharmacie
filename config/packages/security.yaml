@@ -5,7 +5,7 @@ security:
         from_database:
             entity:
                 class: App\Entity\User
-                property: username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -15,6 +15,11 @@ security:
             logout:
                 path: /logout
                 target: /
+
+            pattern:    ^/
+            user_checker: App\Security\UserChecker # activation du UserChecker créé précédemment
+            http_basic: ~
+            provider: from_database
 
             # activate different ways to authenticate
 

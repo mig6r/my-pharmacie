@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -17,15 +18,48 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=25)
      */
     private $username;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\Email()
+     * @Assert\NotBlank()
+     * @Assert\Length(max=60)
+*/
+    private $email;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserInfos", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userInfos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Famille", inversedBy="users")
+     */
+    private $famille;
 
     public function getId(): ?int
     {
@@ -37,12 +71,13 @@ class User implements UserInterface, \Serializable
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername($username)
     {
         $this->username = $username;
-
         return $this;
     }
+
+
 
     public function getPassword(): ?string
     {
@@ -73,7 +108,7 @@ class User implements UserInterface, \Serializable
     public function getRoles()
     {
 
-        return ['ROLE_ADMIN', 'ROLE_USERTEST'];
+        return ['ROLE_ADMIN'];
     }
 
     /**
@@ -88,6 +123,22 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
+    /*
+ * Get isActive
+ */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /*
+     * Set isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
     /**
      * Removes sensitive data from the user.
      *
@@ -109,8 +160,10 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
+            $this->email,
+            $this->password,
             $this->username,
-            $this->password
+            $this->isActive
         ]);
     }
 
@@ -127,8 +180,51 @@ class User implements UserInterface, \Serializable
     {
        list(
            $this->id,
+           $this->email,
+           $this->password,
            $this->username,
-           $this->password
+           $this->isActive
            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUserInfos(): ?UserInfos
+    {
+        return $this->userInfos;
+    }
+
+    public function setUserInfos(UserInfos $userInfos): self
+    {
+        $this->userInfos = $userInfos;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $userInfos->getUser()) {
+            $userInfos->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): self
+    {
+        $this->famille = $famille;
+
+        return $this;
     }
 }

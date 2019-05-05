@@ -2,15 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\CatMedicaments;
 use App\Entity\Famille;
-use App\Entity\Symptome;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityRepository;
 
-class SymptomeType extends AbstractType
+class CatMedicamentsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,13 +29,14 @@ class SymptomeType extends AbstractType
 
             ])
             ->add('name')
+            //->add('famille')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Symptome::class,
+            'data_class' => CatMedicaments::class,
         ])->setRequired('famille');
     }
 }

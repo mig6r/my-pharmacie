@@ -1,0 +1,15 @@
+{%  extends "base.html.twig" %}
+
+{%  block title %}Edition : {{ cat_medicament.name }}{% endblock %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1>Edition de la catégorie {{ cat_medicament.name }}</h1>
+
+        {{ include('admin/categories/_form.html.twig', {form: form, button: 'Editer'}) }}
+
+    </div>
+
+
+{% endblock %}

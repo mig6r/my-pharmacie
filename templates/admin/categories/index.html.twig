@@ -1,0 +1,47 @@
+{%  extends "base.html.twig" %}
+
+{%  block title "Gestion des catégroies de médicaments" %}
+{% block body %}
+
+
+<div class="container mt-4">
+    <h1>Gestion des catégroies de médicaments</h1>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for element in cat_medicaments %}
+        <tr>
+            <td>
+                {{ element.name }}
+            </td>
+            <td>
+                <a href="{{ path("admin.categories.edit", {id: element.id}) }}" class="btn btn-secondary">Editer</a>
+                <form method="post" action="{{ path('admin.categories.delete', {id: element.id}) }}" style="display: inline-block"  onsubmit="return confirm('Vous êtes sur le point de supprimer une catégorie')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ element.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <a href="{{ path("admin.categories.new") }}" class="btn btn-secondary">Ajouter une catégorie</a>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -19,6 +19,16 @@ class GroupsMedicRepository extends ServiceEntityRepository
         parent::__construct($registry, GroupsMedic::class);
     }
 
+    public function findAllForUser($famille)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.famille = :val')
+            ->setParameter('val', $famille)
+            ->orderBy('g.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     /**
      * @return array

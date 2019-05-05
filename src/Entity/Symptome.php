@@ -28,6 +28,12 @@ class Symptome
      */
     private $medicaments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Famille", inversedBy="symptomes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $famille;
+
     public function __construct()
     {
         $this->medicaments = new ArrayCollection();
@@ -74,6 +80,18 @@ class Symptome
             $this->medicaments->removeElement($medicament);
             $medicament->removeSymptome($this);
         }
+
+        return $this;
+    }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): self
+    {
+        $this->famille = $famille;
 
         return $this;
     }

@@ -3,20 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Famille;
-use App\Entity\Symptome;
+use App\Entity\GroupsMedic;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityRepository;
 
-class SymptomeType extends AbstractType
+class GroupsMedicType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $famille = $options['famille'];
         $builder
-
             ->add('famille', EntityType::class, [
                 'class' => Famille::class,
                 'query_builder' => function (EntityRepository $er ) use ($famille) {
@@ -28,14 +27,14 @@ class SymptomeType extends AbstractType
                 'choice_label' => 'name'
 
             ])
-            ->add('name')
+            ->add('Name')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Symptome::class,
+            'data_class' => GroupsMedic::class,
         ])->setRequired('famille');
     }
 }
