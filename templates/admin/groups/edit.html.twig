@@ -1,0 +1,15 @@
+{%  extends "base.html.twig" %}
+
+{%  block title %}Edition : {{ groups_medic.name }}{% endblock %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1>Edition du groupe {{ groups_medic.name }}</h1>
+
+        {{ include('admin/groups/_form.html.twig', {form: form, button: 'Editer'}) }}
+
+    </div>
+
+
+{% endblock %}

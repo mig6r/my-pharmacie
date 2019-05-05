@@ -3,18 +3,19 @@
 namespace App\Form;
 
 use App\Entity\CatMedicaments;
+use App\Entity\Famille;
 use App\Entity\GroupsMedic;
 use App\Entity\Medicament;
 use App\Entity\Symptome;
-use App\Repository\CatMedicamentsRepository;
-use App\Repository\GroupsMedicRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class MedicamentType extends AbstractType
@@ -23,7 +24,19 @@ class MedicamentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $famille = $options['famille'];
         $builder
+            ->add('famille', EntityType::class, [
+                'class' => Famille::class,
+                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.id = :famille')
+                        ->setParameter('famille', $famille);
+
+                },
+                'choice_label' => 'name'
+
+            ])
             ->add('name')
             ->add('description')
             //->add('notice', FileType::class)
@@ -33,13 +46,13 @@ class MedicamentType extends AbstractType
                 ->add('imageFile', FileType::class, [
                   'required' => false
             ])
+            /*
+            ->add('famille', HiddenType::class, [
+                    'data' => $options['famille'],
+                ]
+            )*/
 
-
-
-
-
-
-          /* ->add('id_group', EntityType::class, [
+            /* ->add('id_group', EntityType::class, [
                 'class' => GroupsMedic::class,
                 'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('g')
@@ -53,6 +66,12 @@ class MedicamentType extends AbstractType
             ->add('commentaires')
             ->add('catMedicament', EntityType::class, [
                 'class' => CatMedicaments::class,
+                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.famille = :famille')
+                        ->setParameter('famille', $famille);
+
+                },
                 'choice_label' => 'name'
 
             ])
@@ -65,6 +84,12 @@ class MedicamentType extends AbstractType
 
             ->add('symptomes', EntityType::class, [
                 'class' => Symptome::class,
+                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.famille = :famille')
+                        ->setParameter('famille', $famille);
+
+                },
                 'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false
@@ -77,7 +102,7 @@ class MedicamentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Medicament::class,
             'translation_domain' => 'forms'
-        ]);
+        ])->setRequired('famille');
     }
 
     public function getTypes()

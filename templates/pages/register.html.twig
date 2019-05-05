@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block title "Inscription" %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1>Inscription</h1>
+
+
+        {%  if not form.vars.valid %}
+            <div class="alert alert-danger">
+                Des erreurs sont présentes sur votre formulaire
+            </div>
+        {% endif %}
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <div class="col">
+            <button class="btn btn-primary">Envoi du message</button>
+        </div>
+        {{ form_end(form) }}
+
+
+    </div>
+    </div>
+{% endblock %}

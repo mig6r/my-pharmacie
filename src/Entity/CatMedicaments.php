@@ -28,6 +28,12 @@ class CatMedicaments
      */
     private $medicament;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Famille", inversedBy="catMedicaments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $famille;
+
     public function __construct()
     {
         $this->medicament = new ArrayCollection();
@@ -77,6 +83,18 @@ class CatMedicaments
                 $medicament->setCatMedicament(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): self
+    {
+        $this->famille = $famille;
 
         return $this;
     }

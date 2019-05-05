@@ -51,7 +51,9 @@ return $this->render("admin/medicaments/index.html.twig",  [
     public function new(Request $request)
     {
         $medicament = new Medicament();
-        $form = $this->createForm(MedicamentType::class, $medicament);
+        $form = $this->createForm(MedicamentType::class, $medicament, [
+            'famille' => $this->getUser()->getFamille()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
@@ -77,7 +79,9 @@ return $this->render("admin/medicaments/index.html.twig",  [
     {
 
 
-        $form = $this->createForm(MedicamentType::class, $medicament);
+        $form = $this->createForm(MedicamentType::class, $medicament, [
+            'famille' => $this->getUser()->getFamille()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){

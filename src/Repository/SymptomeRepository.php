@@ -22,19 +22,18 @@ class SymptomeRepository extends ServiceEntityRepository
     // /**
     //  * @return Symptome[] Returns an array of Symptome objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllForUser($famille)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('s.famille = :val')
+            ->setParameter('val', $famille)
+            ->orderBy('s.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Symptome

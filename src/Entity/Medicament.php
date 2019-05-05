@@ -108,6 +108,15 @@ class Medicament
      */
     private $GroupMedicament;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Famille", inversedBy="medicaments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $famille;
+
+
+
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -294,6 +303,25 @@ class Medicament
 
         return $this;
     }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): self
+    {
+        $this->famille = $famille;
+
+        return $this;
+    }
+
+
+
+
+
+
+
 
 
 }

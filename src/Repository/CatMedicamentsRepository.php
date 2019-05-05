@@ -20,24 +20,19 @@ class CatMedicamentsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array
-
-    public function getChoices(): array
+     * @param $famille
+     * @return mixed
+     */
+    public function findAllForUser($famille)
     {
-
-        $choices = $this->createQueryBuilder(('c'))
-            ->select('c.id, c.name')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.famille = :val')
+            ->setParameter('val', $famille)
             ->orderBy('c.name', 'ASC')
             ->getQuery()
             ->getResult()
-        ;
-        $arr = [];
-        foreach ($choices as $k => $v) {
-            $arr[$v["name"]] = $v["id"];
-        }
-        return $arr;
+            ;
     }
-*/
 
 
     // /**
