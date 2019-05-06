@@ -38,6 +38,7 @@ class AdminSymptomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $symptome->setFamille($this->getUser()->getFamille());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($symptome);
             $entityManager->flush();
@@ -66,6 +67,10 @@ class AdminSymptomeController extends AbstractController
      */
     public function edit(Request $request, Symptome $symptome): Response
     {
+        if($this->getUser()->getFamille() != $symptome->getFamille()){
+            $this->addFlash('error', "Vous avez été redirigé car vous n'avez pas l'autorisation d'éditer ce symptome");
+            return $this->redirectToRoute('admin.groups.index');
+        }
         $form = $this->createForm(SymptomeType::class, $symptome, [
             'famille' => $this->getUser()->getFamille()
         ]);

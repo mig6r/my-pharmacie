@@ -49,7 +49,7 @@ class MedicamentController extends AbstractController
         $form->handleRequest($request);
 
         //on récupère la requette SQL dans le repository
-        $queryMedicament = $this->repository->findAllEnableQuery($search);
+        $queryMedicament = $this->repository->findAllEnableQuery($search, $this->getUser()->getFamille());
 
         //On utilise le bundle Paginator KNP
         $medicament = $paginator->paginate(

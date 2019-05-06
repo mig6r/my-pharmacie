@@ -16,7 +16,7 @@ class CatMedicamentsType extends AbstractType
     {
         $famille = $options['famille'];
         $builder
-
+/*
             ->add('famille', EntityType::class, [
                 'class' => Famille::class,
                 'query_builder' => function (EntityRepository $er ) use ($famille) {
@@ -28,6 +28,7 @@ class CatMedicamentsType extends AbstractType
                 'choice_label' => 'name'
 
             ])
+*/
             ->add('name')
             //->add('famille')
         ;

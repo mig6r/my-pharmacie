@@ -15,14 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminCatMedicamentsController extends AbstractController
 {
+
     /**
      * @Route("/", name="admin.categories.index", methods={"GET"})
      */
     public function index(CatMedicamentsRepository $catMedicamentsRepository): Response
     {
-        $famille = $this->getUser()->getFamille();
+
         return $this->render('admin/categories/index.html.twig', [
-            'cat_medicaments' => $catMedicamentsRepository->findAllForUser($famille),
+            'cat_medicaments' => $catMedicamentsRepository->findAllForUser($this->getUser()->getFamille()),
             'current_menu' => 'admin_categories'
         ]);
     }
@@ -39,6 +40,7 @@ class AdminCatMedicamentsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $catMedicament->setFamille($this->getUser()->getFamille());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($catMedicament);
             $entityManager->flush();
@@ -68,6 +70,11 @@ class AdminCatMedicamentsController extends AbstractController
      */
     public function edit(Request $request, CatMedicaments $catMedicament): Response
     {
+        if($this->getUser()->getFamille() != $catMedicament->getFamille()){
+            $this->addFlash('error', "Vous avez été redirigé car vous n'avez pas l'autorisation d'éditer cette catégorie");
+            return $this->redirectToRoute('admin.categories.index');
+        }
+
         $form = $this->createForm(CatMedicamentsType::class, $catMedicament, [
             'famille' => $this->getUser()->getFamille()
         ]);
@@ -75,10 +82,8 @@ class AdminCatMedicamentsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('admin.categories.index', [
-                'id' => $catMedicament->getId(),
-            ]);
+            $this->addFlash('success', 'La catégorie a bien été éditée');
+            return $this->redirectToRoute('admin.categories.index');
         }
 
         return $this->render('admin/categories/edit.html.twig', [
@@ -86,6 +91,7 @@ class AdminCatMedicamentsController extends AbstractController
             'form' => $form->createView(),
             'current_menu' => 'admin_categories'
         ]);
+
     }
 
     /**

@@ -27,7 +27,7 @@ public function index(MedicamentRepository $repository)
 
     //$usertest = $this->getUser()->getId();
     //var_dump($usertest);
-    $medicament = $repository->findLatest();
+    $medicament = $repository->findLatest($this->getUser()->getFamille());
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",
         "medicaments" => $medicament,

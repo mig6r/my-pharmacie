@@ -16,6 +16,7 @@ class GroupsMedicType extends AbstractType
     {
         $famille = $options['famille'];
         $builder
+            /*
             ->add('famille', EntityType::class, [
                 'class' => Famille::class,
                 'query_builder' => function (EntityRepository $er ) use ($famille) {
@@ -27,6 +28,7 @@ class GroupsMedicType extends AbstractType
                 'choice_label' => 'name'
 
             ])
+            */
             ->add('Name')
         ;
     }
