@@ -22,12 +22,24 @@ class MedicamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Medicament::class);
     }
 
+    public function findAllForUser($famille)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.famille = :val')
+            ->setParameter('val', $famille)
+            ->orderBy('m.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /**
      * @return Query
      */
-    public function findAllEnableQuery(MedicamentFilter $search): Query
+    public function findAllEnableQuery(MedicamentFilter $search, $famille): Query
     {
-        $query = $this->findEnableQuery();
+        $query = $this->findEnableQuery($famille);
+
 
 
         if ($search->getCatMedic()){
@@ -54,25 +66,29 @@ class MedicamentRepository extends ServiceEntityRepository
                     ->setParameter('symptome', $symptome);
             }
         }
+
+
             return $query->getQuery();
     }
 
     /**
      * @return Medicament[]
      */
-    public function findLatest(): array
+    public function findLatest($famille): array
     {
-        return $this->findEnableQuery()
+        return $this->findEnableQuery($famille)
             ->setMaxResults(5)
             ->getQuery()
         ->getResult();
     }
 
 
-    private function findEnableQuery(): QueryBuilder
+    private function findEnableQuery($famille): QueryBuilder
     {
         return $this->createQueryBuilder("m")
-            ->where("m.enable = true");
+            ->where("m.enable = true")
+        ->andWhere('m.famille = :val')
+        ->setParameter('val', $famille);
     }
     // /**
     //  * @return Medicament[] Returns an array of Medicament objects

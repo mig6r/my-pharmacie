@@ -40,6 +40,7 @@ class AdminGroupsMedicController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $groupsMedic->setFamille($this->getUser()->getFamille());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($groupsMedic);
             $entityManager->flush();
@@ -69,6 +70,11 @@ class AdminGroupsMedicController extends AbstractController
      */
     public function edit(Request $request, GroupsMedic $groupsMedic): Response
     {
+        if($this->getUser()->getFamille() != $groupsMedic->getFamille()){
+            $this->addFlash('error', "Vous avez été redirigé car vous n'avez pas l'autorisation d'éditer ce groupe");
+            return $this->redirectToRoute('admin.groups.index');
+        }
+
         $form = $this->createForm(GroupsMedicType::class, $groupsMedic, [
             'famille' => $this->getUser()->getFamille()
         ]);
@@ -76,10 +82,8 @@ class AdminGroupsMedicController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('admin.groups.index', [
-                'id' => $groupsMedic->getId(),
-            ]);
+            $this->addFlash('success', 'Le groupe a bien été édité');
+            return $this->redirectToRoute('admin.groups.index');
         }
 
         return $this->render('admin/groups/edit.html.twig', [

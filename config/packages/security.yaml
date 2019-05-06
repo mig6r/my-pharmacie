@@ -17,7 +17,7 @@ security:
                 target: /
 
             pattern:    ^/
-            user_checker: App\Security\UserChecker # activation du UserChecker créé précédemment
+            user_checker: App\Security\UserChecker # activation du UserChecker
             http_basic: ~
             provider: from_database
 

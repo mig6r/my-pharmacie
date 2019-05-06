@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use App\Security\UserChecker;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use App\Entity\User;
 use App\Form\UserType;
+
 
 class SigninController extends AbstractController
 {
@@ -31,6 +33,8 @@ class SigninController extends AbstractController
             $this->addFlash('success', 'Votre compte a bien été créé');
             return $this->redirectToRoute("login");
         }
+
+
 
         return $this->render('pages/register.html.twig', [
             'form' => $form->createView(),

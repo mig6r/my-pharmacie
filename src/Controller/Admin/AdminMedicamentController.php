@@ -38,7 +38,7 @@ class AdminMedicamentController extends AbstractController
      */
     public function index()
     {
-$medicaments = $this->repository->findAll();
+$medicaments = $this->repository->findAllForUser($this->getUser()->getFamille());
 return $this->render("admin/medicaments/index.html.twig",  [
     "medicaments" => $medicaments,
     "current_menu" => "admin_medicaments",
@@ -57,6 +57,7 @@ return $this->render("admin/medicaments/index.html.twig",  [
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $medicament->setFamille($this->getUser()->getFamille());
             $this->em->persist($medicament);
             $this->em->flush();
             $this->addFlash('success', 'Le médicament a bien été créé');
@@ -77,7 +78,10 @@ return $this->render("admin/medicaments/index.html.twig",  [
      */
     public function edit(Medicament $medicament,Request $request)
     {
-
+        if($this->getUser()->getFamille() != $medicament->getFamille()){
+            $this->addFlash('error', "Vous avez été redirigé car vous n'avez pas l'autorisation d'éditer ce médicament");
+            return $this->redirectToRoute('admin.medicaments.index');
+        }
 
         $form = $this->createForm(MedicamentType::class, $medicament, [
             'famille' => $this->getUser()->getFamille()

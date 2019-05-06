@@ -26,6 +26,7 @@ class MedicamentType extends AbstractType
     {
         $famille = $options['famille'];
         $builder
+            /*
             ->add('famille', EntityType::class, [
                 'class' => Famille::class,
                 'query_builder' => function (EntityRepository $er ) use ($famille) {
@@ -37,6 +38,7 @@ class MedicamentType extends AbstractType
                 'choice_label' => 'name'
 
             ])
+            */
             ->add('name')
             ->add('description')
             //->add('notice', FileType::class)
@@ -70,7 +72,6 @@ class MedicamentType extends AbstractType
                     return $er->createQueryBuilder('u')
                         ->where('u.famille = :famille')
                         ->setParameter('famille', $famille);
-
                 },
                 'choice_label' => 'name'
 
@@ -78,6 +79,11 @@ class MedicamentType extends AbstractType
 
             ->add('GroupMedicament', EntityType::class, [
                 'class' => GroupsMedic::class,
+                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                    return $er->createQueryBuilder('g')
+                        ->where('g.famille = :famille')
+                        ->setParameter('famille', $famille);
+                },
                 'choice_label' => 'name',
                 'required' => true
             ])
@@ -88,7 +94,6 @@ class MedicamentType extends AbstractType
                     return $er->createQueryBuilder('u')
                         ->where('u.famille = :famille')
                         ->setParameter('famille', $famille);
-
                 },
                 'choice_label' => 'name',
                 'multiple' => true,
