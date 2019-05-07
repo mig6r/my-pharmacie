@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title "Initialisation de la famille" %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <h1>Initialisation de votre famille</h1>
+        </div>
+        <h2>Bienvenue sur votre pharmacie personnelle</h2>
+        <p>Afin de pouvoir utiliser votre pharmarcie, vous devez dans un premier temps, créer ou rejoindre une
+            famille.<br>
+            Tous les éléments que vous créerez ensuite seront associés à cette famille.
+        </p>
+
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Créer votre famille</h3>
+            </div>
+
+            <div class="col-md-12">
+                <p>Vous êtes l'administrateur de votre famille et pourrez par la suite inviter d'autre personnes à vous
+                    rejoindre</p>
+            </div>
+        </div>
+        {{ form_start(create) }}
+        <div class="row">
+            <div class="col">
+                {{ form_row(create.name) }}
+            </div>
+            <div class="col">
+
+                <button class="btn btn-primary">Créer</button>
+            </div>
+        </div>
+        {{ form_end(create) }}
+
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Rejoignez une famille</h3>
+            </div>
+            <div class="col-md-12">
+                <p>Si un code vous a été fourni pour rejoindre une famille, vous êtes ici au bon endroit</p>
+            </div>
+        </div>
+        <form method="post" action="{{ path('dash.familles.join') }}">
+        <div class="row">
+            <div class="col">
+
+                    <div class="form-group">
+                        <input type="text" id="token" name="token" placehoder="Token" class="form-control">
+                        <input type="hidden" name="_method" value="JOIN">
+                        <input type="hidden" name="_token" value="{{ csrf_token('join' ~ app.user.id) }}">
+                    </div>
+
+            </div>
+            <div class="col">
+
+                <button class="btn btn-primary">Rejoindre</button>
+            </div>
+
+        </div>
+    </form>
+    </div>
+
+{% endblock %}

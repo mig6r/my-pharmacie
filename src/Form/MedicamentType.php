@@ -73,7 +73,10 @@ class MedicamentType extends AbstractType
                         ->where('u.famille = :famille')
                         ->setParameter('famille', $famille);
                 },
-                'choice_label' => 'name'
+
+                'placeholder' => '',
+                'choice_label' => 'name',
+                'required' => false
 
             ])
 
@@ -85,7 +88,8 @@ class MedicamentType extends AbstractType
                         ->setParameter('famille', $famille);
                 },
                 'choice_label' => 'name',
-                'required' => true
+                'placeholder' => '',
+                'required' => false
             ])
 
             ->add('symptomes', EntityType::class, [

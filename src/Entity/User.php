@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,6 +23,13 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
+    /**
+     * @var array
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
+
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
@@ -35,6 +43,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
@@ -52,6 +66,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->roles = ['ROLE_USER'];
     }
 
 
@@ -95,24 +110,32 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return ['ROLE_USER'];
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
     public function getRoles()
     {
+        return $this->roles;
+    }
 
-        return ['ROLE_ADMIN'];
+    public function setRoles(array $roles)
+    {
+
+        foreach ($roles as $role)
+        {
+            if(substr($role, 0, 5) !== 'ROLE_') {
+                throw new InvalidArgumentException("Chaque rôle doit commencer par 'ROLE_'");
+            }
+        }
+        $this->roles = $roles;
+        return $this;
     }
 
     /**

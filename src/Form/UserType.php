@@ -15,15 +15,25 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('username')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => array('label' => "Mot de passe"),
-                'second_options' => array('label' => "Confirmation du mot de passe")
-            ])
-
-            //->add('userInfos')
-        ;
+            ->add('username');
+ if (in_array('registration', $options['validation_groups'])) {
+     $builder
+         ->add('plainPassword', RepeatedType::class, array(
+             'type' => PasswordType::class,
+             'first_options'  => array('label' => 'Mot de passe'),
+             'second_options' => array('label' => 'Confirmer le mot de passe'),
+         ))
+     ;
+ } else {
+     $builder
+         ->add('plainPassword', RepeatedType::class, array(
+             'required' => false,
+             'type' => PasswordType::class,
+             'first_options'  => array('label' => 'Mot de passe'),
+             'second_options' => array('label' => 'Confirmer le mot de passe'),
+         ))
+     ;
+ }
     }
 
     public function configureOptions(OptionsResolver $resolver)

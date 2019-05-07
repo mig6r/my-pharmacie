@@ -36,15 +36,20 @@ class FamilleRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Famille
+
+    /**
+     * @param $token
+     * @return Famille|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByFamille($token): ?Famille
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('f.token = :token')
+            ->setParameter('token', $token)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

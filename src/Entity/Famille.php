@@ -50,6 +50,17 @@ class Famille
      */
     private $groupsMedics;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $admin;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
+
 
 
 
@@ -241,6 +252,30 @@ class Famille
                 $groupsMedic->setFamille(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdmin(): ?User
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?User $admin): self
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

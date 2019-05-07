@@ -38,7 +38,7 @@ class MedicamentController extends AbstractController
     }
 
     /**
-     * @Route("/medicaments", name="medicament.index")
+     * @Route("/dash/medicaments", name="dash.medicament.index")
      * @return Response
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
@@ -67,7 +67,7 @@ class MedicamentController extends AbstractController
     }
 
     /**
-     * @Route("/medicaments/{slug}-{id}", name="medicament.detail", requirements={"slug": "[a-z0-9\-]*"})
+     * @Route("/dash/medicaments/{slug}-{id}", name="dash.medicament.detail", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
     public function detail($slug, Medicament $medicament): Response
@@ -78,7 +78,7 @@ class MedicamentController extends AbstractController
         /// la recherche à notre place
 
         if ($medicament->getSlug() !== $slug) {
-            return $this->redirectToRoute("medicament.detail", [
+            return $this->redirectToRoute("dash.medicament.detail", [
                 "id" => $medicament->getId(),
                 "slug" => $medicament->getSlug()
             ], 301);

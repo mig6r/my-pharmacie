@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/dash", name="home")
      * @param MedicamentRepository $repository
      *
      */
@@ -27,6 +27,11 @@ public function index(MedicamentRepository $repository)
 
     //$usertest = $this->getUser()->getId();
     //var_dump($usertest);
+
+    if(!$this->getUser()->getFamille()){
+        return $this->redirectToRoute("dash.familles.init");
+    }
+    //var_dump($this->getUser()->getFamille());
     $medicament = $repository->findLatest($this->getUser()->getFamille());
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",

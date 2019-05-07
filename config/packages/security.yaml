@@ -1,42 +1,55 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        #in_memory: { memory: ~ }
-        from_database:
-            entity:
-                class: App\Entity\User
+        access_denied_url: /
+        # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+        providers:
 
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
-            logout:
-                path: /logout
-                target: /
+            #in_memory: { memory: ~ }
+            from_database:
+                entity:
+                    class: App\Entity\User
 
-            pattern:    ^/
-            user_checker: App\Security\UserChecker # activation du UserChecker
-            http_basic: ~
-            provider: from_database
+        firewalls:
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+            main:
+                anonymous: true
+                logout:
+                    path: /logout
+                    target: /
 
-            # activate different ways to authenticate
+                pattern:    ^/
+                user_checker: App\Security\UserChecker # activation du UserChecker
+                http_basic: ~
+                provider: from_database
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+                # activate different ways to authenticate
 
-            form_login:
-                check_path: login
-            # https://symfony.com/doc/current/security/form_login_setup.html
+                # http_basic: true
+                # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+                form_login:
+                    login_path: /
+                    check_path: /
+                    csrf_token_generator: security.csrf.token_manager
+                    failure_path: /
+                    default_target_path: /dash
+                # https://symfony.com/doc/current/security/form_login_setup.html
 
-    encoders:
-        App\Entity\User:
-            algorithm: bcrypt
-            cost: 12
+        # Easy way to control access for large sections of your site
+        # Note: Only the *first* access control that matches will be used
+        role_hierarchy:
+            # un membre avec le ROLE_ADMIN aura également le ROLE_USER
+            ROLE_ADMIN: ROLE_USER
+            # Le ROLE_SUPER_ADMIN avec le ROLE_ALLOWED_TO_SWITCH qui permet de s'authentifier en se faisant passer pour n'importe quel membre. Particulièrement utile pour débugger son code.
+            ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+        access_control:
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/user, roles: ROLE_USER }
+            # - { path: ^/profile, roles: ROLE_USER }
+
+        encoders:
+            App\Entity\User:
+                algorithm: bcrypt
+                cost: 12
