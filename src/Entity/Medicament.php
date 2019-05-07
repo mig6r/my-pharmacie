@@ -98,13 +98,13 @@ class Medicament
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CatMedicaments", inversedBy="medicament")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $catMedicament;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\GroupsMedic", inversedBy="medicaments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $GroupMedicament;
 

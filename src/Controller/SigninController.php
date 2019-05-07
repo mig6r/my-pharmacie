@@ -22,11 +22,13 @@ class SigninController extends AbstractController
     public function index(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $em)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'validation_groups' => array('User', 'registration')
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $encoder->encodePassword($user, $user->getPassword());
+            $password = $encoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();

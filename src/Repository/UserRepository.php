@@ -16,4 +16,22 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findUsersByFamille($famille)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.famille = :famille')
+            ->setParameter('famille', $famille)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findUser($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

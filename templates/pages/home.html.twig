@@ -4,6 +4,16 @@
 
 
     <div class="container-fluid mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h2>Derniers médicaments ajoutés</h2>
         <div class="row mt-4">
             {% for element in medicaments %}
@@ -11,7 +21,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{{ path('medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
+                            <a href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
 
                         </h5>
                         <p class="card-text">{{ element.description | nl2br }}</p>

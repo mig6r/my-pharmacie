@@ -1,0 +1,128 @@
+{% extends "base.html.twig" %}
+
+{% block title "Ma famille" %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1>Gestion de votre famille :
+            <large class="text-muted"> {{ famille.name }}</large>
+        </h1>
+
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        {% if app.user == famille.admin %}
+            <div class="d-flex flex-row-reverse">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#token">
+                    Inviter une personne
+                </button>
+            </div>
+        {% endif %}
+
+
+        <table class="table table-striped mt-4">
+            <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Rôle actuel</th>
+                {% if app.user == famille.admin %}
+                    <th>Changer le rôle</th>
+                {% endif %}
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for element in users %}
+                <tr>
+                    <td>
+                        {{ element.email }}
+                    </td>
+                    <td>
+                        {% if element == famille.admin %}
+                            <span class="badge badge-pill badge-warning">Admin Princpal</span>
+                        {% else %}
+
+                            {% if element.roles.0 == 'ROLE_USER' %}
+                                <span class="badge badge-pill badge-success">Utilisateur</span>
+                            {% elseif element.roles.0 == 'ROLE_ADMIN' %}
+                                <span class="badge badge-primary">Administrateur</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    {% if app.user == famille.admin %}
+                        <td>
+                            {% if element != app.user %}
+                                {% if element.roles.0 == 'ROLE_USER' %}
+
+
+                                    <form method="post"
+                                          action="{{ path('dash.familles.switchadmin', {id: element.id}) }}"
+                                          style="display: inline-block"
+                                          onsubmit="return confirm('Vous êtes sur le point de passer le user en admin')">
+                                        <input type="hidden" name="role" value="ROLE_ADMIN">
+                                        <input type="hidden" name="id" value={{ element.id }}>
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('switch' ~ element.id) }}">
+                                        <button class="btn btn-danger btn-sm">Basculer en admin</button>
+                                    </form>
+                                {% elseif element.roles.0 == 'ROLE_ADMIN' %}
+                                    <form method="post"
+                                          action="{{ path('dash.familles.switchadmin', {id: element.id}) }}"
+                                          style="display: inline-block">
+                                        <input type="hidden" name="role" value="ROLE_USER">
+                                        <input type="hidden" name="id" value={{ element.id }}>
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('switch' ~ element.id) }}">
+                                        <button class="btn btn-info btn-sm">Basculer en utilisateur</button>
+                                    </form>
+                                {% endif %}
+
+                            {% else %}
+                                Vous êtes l'administrateur principal
+                            {% endif %}
+
+                        </td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    {% if app.user == famille.admin %}
+        <!-- Modal -->
+        <div class="modal fade" id="token" tabindex="-1" role="dialog" aria-labelledby="Token d'invitation"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Code d'invitation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Code à fournir pour pour inviter une personne à rejoindre votre famille : <br>
+                        <span class="text-primary"> {{ famille.token }}</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

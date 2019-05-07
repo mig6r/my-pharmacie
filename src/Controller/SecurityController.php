@@ -17,11 +17,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name = "login")
+     * @Route("/", name = "login")
      *
      */
     public function login(AuthenticationUtils $authUtil)
     {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('home');
+        }
+
         $error = $authUtil->getLastAuthenticationError();
         $lastUsername = $authUtil->getLastUserName();
 
