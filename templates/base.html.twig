@@ -5,7 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block stylesheets %}  {{ encore_entry_link_tags('app') }}{% endblock %}
-          <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+
 
 
     </head>
@@ -24,14 +24,22 @@
                     <a class="nav-link {% if current_menu is defined and current_menu == "home" %}active{% endif %}" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == "medicaments" %}active{% endif %}" href="/medicaments">Liste des médicaments </a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == "medicaments" %}active{% endif %}" href="/dash/medicaments">Liste des médicaments </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == "contact" %}active{% endif %}" href="/contact">Contact</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "ma_famille" or current_menu =="mon_compte" ) %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ app.user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item {% if current_menu is defined and current_menu == "mon_compte" %}active{% endif %}" href="#">Mon compte</a>
+                        <a class="dropdown-item {% if current_menu is defined and current_menu == "ma_famille" %}active{% endif %}" href="{{ path("dash.familles.index") }}">Ma famille</a>
+
+                    </div>
                 </li>
 
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu =="admin_symptomes" or current_menu =="admin_categories" or current_menu =="admin_groups") %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Administration
@@ -46,8 +54,11 @@
                     </div>
                 </li>
                 {% endif %}
-
+                <li class="nav-item">
+                    <a class="nav-link {% if current_menu is defined and current_menu == "contact" %}active{% endif %}" href="/contact">Contact</a>
+                </li>
             </ul>
+
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
