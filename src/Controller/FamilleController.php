@@ -41,7 +41,7 @@ class FamilleController extends AbstractController
         $users = $repositoryUser->findUsersByFamille($this->getUser()->getFamille());
 
         return $this->render("familles/dashboard.twig", [
-            "current_menu" => "familles",
+            "current_menu" => "ma_famille",
             "famille" => $famille,
             "users" => $users
         ]);

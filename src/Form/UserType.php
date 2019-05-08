@@ -20,8 +20,8 @@ class UserType extends AbstractType
      $builder
          ->add('plainPassword', RepeatedType::class, array(
              'type' => PasswordType::class,
-             'first_options'  => array('label' => 'Mot de passe'),
-             'second_options' => array('label' => 'Confirmer le mot de passe'),
+             'first_options'  => array('label' => false, 'attr' => ['class' =>'input100']),
+             'second_options' => array('label' => false, 'attr' => ['class' =>'input100']),
          ))
      ;
  } else {
@@ -29,8 +29,8 @@ class UserType extends AbstractType
          ->add('plainPassword', RepeatedType::class, array(
              'required' => false,
              'type' => PasswordType::class,
-             'first_options'  => array('label' => 'Mot de passe'),
-             'second_options' => array('label' => 'Confirmer le mot de passe'),
+             'first_options'  => array('label' => false, 'attr' => ['class' =>'input100']),
+             'second_options' => array('label' => false, 'attr' => ['class' =>'input100']),
          ))
      ;
  }

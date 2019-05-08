@@ -17,7 +17,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "animate.css": "^3.7.0",
         "bootstrap": "^4.3.1",
+        "copy-webpack-plugin": "^5.0.3",
+        "font-awesome": "^4.7.0",
         "select2": "^4.0.7-rc.0"
     }
 }

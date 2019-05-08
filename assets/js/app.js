@@ -3,6 +3,8 @@
 let $ = require('jquery');
 require('bootstrap');
 require('../css/app.scss');
+//require('./main.js');
+//require('./map-custom.js')
 
 
 require ('select2');

@@ -13,10 +13,10 @@ use App\Entity\User;
 use App\Form\UserType;
 
 
-class SigninController extends AbstractController
+class RegisterController extends AbstractController
 {
     /**
-     * @Route("/signin", name="page.signin")
+     * @Route("/register", name="page.register")
      */
 
     public function index(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $em)
