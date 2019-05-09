@@ -3,51 +3,88 @@
 {% block title "Liste des médicaments" %}
 {% block body %}
 
-    <div class="container mt-4 ">
-        {{ form_start(form) }}
-        <div class="form-row ">
-            <div class="col">
-
-                {{ form_row(form.catMedic) }}
-
-            </div>
-            <div class="col">
-                {{ form_row(form.groupMedic) }}
-            </div>
-
-            <div class="col">
-                {{ form_row(form.symptomes) }}
-            </div>
-            <div class="col">
-                <div class="form_group">
-                    <button type="submit" class="btn btn-primary">Filtrer</button>
-                </div>
-            </div>
-        </div>
-        {{ form_end(form) }}
-    </div>
-
-
-    <div class="container mt-4">
-        <h1>Liste des médicaments</h1>
+    <div class="container-fluid mt-4 ">
+        <h1 class="text-center">Liste des médicaments</h1>
 
 
         <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-2 ">
 
+                <div class="border p-3">
+                    <div class="bg-light p-2">
+                        <p class="text-center">Appliquer un filtre</p>
+                        <div class="dropdown-divider"></div>
 
-            {% for element in medicaments %}
+                    </div>
+                    {{ form_start(form) }}
 
-                <div class="col-md-4">
-                    {% include 'medicaments/_medicament.html.twig' %}
+                    <div class="form-group">
+
+                            {{ form_row(form.catMedic) }}
+
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.groupMedic) }}
+                        </div>
+
+                    <div class="form-group">
+                            {{ form_row(form.symptomes) }}
+                        </div>
+
+                            <div class="form_group">
+                                <button type="submit" class="btn btn-primary">Filtrer</button>
+                            </div>
+
+                    </div>
                 </div>
 
-            {% endfor %}
+
+            {{ form_end(form) }}
+
+
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-10 ">
+
+
+                <div class="card-group">
+
+
+                    {% for element in medicaments %}
+                        <div class="p-2">
+
+
+                            <div class="card" style="width: 15rem; height:15rem; overflow:hidden">
+                                {% if element.picture %}
+                                    <img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumb') }}"
+                                         alt="card-img-top" style=" height:auto;   margin-left: auto;
+  margin-right: auto;
+  display: block;">
+                                {% else %}
+                                    <img src="{{ '/images/medicaments/empty.jpg' | imagine_filter('thumb') }}"
+                                         alt="card-img-top" style="width: 100%; height:auto;">
+                                {% endif %}
+
+                                <div class="card-body">
+
+                                    <h6 class="card-title text-primary">
+                                        <a href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
+                                    </h6>
+                                    <p class="card-text">{{ element.description }}</p>
+                                </div>
+                            </div>
+
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(medicaments) }}
+                </div>
+
+            </div>
         </div>
-        <div class="navigation">
-            {{ knp_pagination_render(medicaments) }}
-        </div>
+
 
     </div>
-
-
 {% endblock %}

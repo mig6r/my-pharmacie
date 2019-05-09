@@ -60,7 +60,7 @@ class MedicamentController extends AbstractController
         $medicament = $paginator->paginate(
             $queryMedicament,
             $request->query->getInt('page', 1),
-            6
+            10
         );
 
         return $this->render("medicaments/index.html.twig", [

@@ -14,4 +14,15 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js!!!');
+$(document).ready(function(){
+    $(".tablerowhref").click(function() {
+        window.document.location = $(this).data("href");
+    });
+})
+
+$(document).ready(function(){
+    $(".tablerowhref").mouseover(function() {
+        //window.document.location = $(this).data("href");
+
+    });
+})

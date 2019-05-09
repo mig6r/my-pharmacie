@@ -74,12 +74,13 @@ class MedicamentRepository extends ServiceEntityRepository
     /**
      * @return Medicament[]
      */
-    public function findLatest($famille): array
+    public function findLatest($famille): Query
     {
         return $this->findEnableQuery($famille)
             ->setMaxResults(5)
-            ->getQuery()
-        ->getResult();
+            ->orderBy('m.id', 'DESC')
+            ->getQuery();
+        //->getResult();
     }
 
 

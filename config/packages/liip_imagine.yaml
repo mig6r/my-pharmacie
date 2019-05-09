@@ -12,13 +12,13 @@ liip_imagine:
         quality: 75
         filters:
           thumbnail:
-                size:   [360, 230]
-                mode:   outbound
+                size:   [210, 100]
+                mode:   inset
       medium :
         quality: 75
         filters:
           thumbnail:
-                size:   [500, 300]
-                mode:   outbound
+                size:   [300, 300]
+                mode:   inset
     # valid drivers options include "gd" or "gmagick" or "imagick"
   #driver: "gd"
