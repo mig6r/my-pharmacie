@@ -1,5 +1,5 @@
-{%  extends "base.html.twig" %}
-{%  block title "Mes médicaments" %}
+{% extends "base.html.twig" %}
+{% block title "Mes médicaments" %}
 {% block body %}
 
 
@@ -14,21 +14,111 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <h2>Derniers médicaments ajoutés</h2>
-        <div class="row mt-4">
-            {% for element in medicaments %}
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
+        <div class="d-inline p-2 pl-5 pr-5 bg-primary text-white rounded">
+            Mon tableau de bord
+        </div>
 
-                        </h5>
-                        <p class="card-text">{{ element.description | nl2br }}</p>
-                    </div>
+
+        <div class="row mt-4 mb-2">
+            <div class="col-md-6">
+                <div class="bg-primary p-2 text-light">
+                Derniers médicament ajoutés
                 </div>
             </div>
-            {% endfor %}
+            <div class="col-md-6">
+                <div class="bg-primary p-2 text-light">
+                Parametres de classification
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Groupe</th>
+                        <th scope="col">Symptome(s)</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for element in medicaments %}
+                        <tr>
+                            <td style="vertical-align: middle"><img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumbTableau')}}" alt="table-img"></td>
+                            <td style="vertical-align: middle">{{ element.name }}</td>
+                            <td style="vertical-align: middle">{{ element.catMedicament.name }}</td>
+                            <td style="vertical-align: middle">{{ element.GroupMedicament.name }}</td>
+                            <td style="vertical-align: middle">{% for symptome in element.Symptomes %} <span class="badge badge-secondary">{{ symptome.name }}</span></br>{% endfor %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-md-2">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Catégories</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for element in categories %}
+                        <tr>
+
+                            <td>{{ element.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-2">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Groupes</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for element in groups %}
+                        <tr>
+
+                            <td>{{ element.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-2">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Symptomes</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for element in symptomes %}
+                        <tr>
+                            <td>{{ element.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
     </div>
 {% endblock %}

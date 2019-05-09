@@ -1,8 +1,8 @@
 Name: Nom du médicament
 Picture: Image
 Enable: Actif
-Id group: Publique
-Id cat: Classe
+Group medicament: Groupe ou publique visé
+Cat medicament: Catégorie
 Firstname: Prénom
 Lastname: Nom
 Phone: Téléphone

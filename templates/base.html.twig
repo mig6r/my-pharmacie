@@ -23,9 +23,11 @@
                 <li class="nav-item">
                     <a class="nav-link {% if current_menu is defined and current_menu == "home" %}active{% endif %}" href="/">Accueil</a>
                 </li>
+                {% if app.user.famille %}
                 <li class="nav-item">
                     <a class="nav-link {% if current_menu is defined and current_menu == "medicaments" %}active{% endif %}" href="/dash/medicaments">Liste des médicaments </a>
                 </li>
+                {% endif %}
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "ma_famille" or current_menu =="mon_compte" ) %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,11 +37,13 @@
                         <a class="dropdown-item {% if current_menu is defined and current_menu == "mon_compte" %}active{% endif %}" href="#">Mon compte</a>
                         <a class="dropdown-item {% if current_menu is defined and current_menu == "ma_famille" %}active{% endif %}" href="{{ path("dash.familles.index") }}">Ma famille</a>
 
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path("logout") }}">Deconnexion</a>
                     </div>
                 </li>
 
 
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if app.user.roles.0 == 'ROLE_ADMIN' %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu =="admin_symptomes" or current_menu =="admin_categories" or current_menu =="admin_groups") %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Administration
@@ -49,8 +53,6 @@
                         <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_symptomes" %}active{% endif %}" href="{{ path("admin.symptome.index") }}">Symptomes</a>
                         <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_categories" %}active{% endif %}" href="{{ path("admin.categories.index") }}">Catégories </a>
                         <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_groups" %}active{% endif %}" href="{{ path("admin.groups.index") }}">Groupes</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path("logout") }}">Deconnexion</a>
                     </div>
                 </li>
                 {% endif %}

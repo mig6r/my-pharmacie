@@ -31,11 +31,11 @@ class FamilleController extends AbstractController
      */
     public function index(FamilleRepository $repository): Response
     {
-        /*
+
         if(!$this->getUser()->getFamille()){
-            return $this->redirectToRoute("dash.familles.choice");
+            return $this->redirectToRoute("dash.familles.init");
         }
-        */
+
         $repositoryUser = $this->getDoctrine()->getRepository(User::class);
         $famille = $repository->find($this->getUser()->getFamille());
         $users = $repositoryUser->findUsersByFamille($this->getUser()->getFamille());
@@ -89,8 +89,8 @@ class FamilleController extends AbstractController
             //$roles=['ROLE_ADMIN'];
             $user->setRoles(['ROLE_ADMIN']);
             $em->flush();
-            $this->addFlash('success', 'Votre famille ' . $famille->getName() . ' a bien été créée');
-            return $this->redirectToRoute("home");
+            //$this->addFlash('success', 'Votre famille ' . $famille->getName() . ' a bien été créée');
+            return $this->redirectToRoute("dash.familles.index");
         }
 
         return $this->render('familles/init.html.twig', [
@@ -119,7 +119,7 @@ class FamilleController extends AbstractController
                 $user->setFamille($famille);
                 $em->flush();
                 $this->addFlash('success', 'Vous avez bien été ajouté à la famille ' . $famille->getName());
-                return $this->redirectToRoute("dash.index");
+                return $this->redirectToRoute("home");
             }
 
 

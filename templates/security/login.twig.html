@@ -40,17 +40,17 @@
                 </p>
             </div>
             {% endfor %}
-            <form class="login100-form validate-form" action="{{ path('login')}}" method="post">
+            <form class="login100-form" action="{{ path('login')}}" method="post">
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
                 >
-                <div class="wrap-input100 validate-input m-b-26">
+                <div class="wrap-input100 m-b-26">
                     <span class="label icon username"></span>
                     <input class="input100" type="text" name="_username" id="username" placeholder="Nom d'utilisateur ou Email" value="{{ lastUsername }}" required>
                     <span class="focus-input100"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-18">
+                <div class="wrap-input100 m-b-18">
                     <span class="label icon password"></span>
                     <input class="input100" type="password" name="_password" id="password" placeholder="Mot de passe" required>
                     <span class="focus-input100"></span>

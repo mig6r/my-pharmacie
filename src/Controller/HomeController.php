@@ -9,7 +9,10 @@
 namespace App\Controller;
 
 
+use App\Repository\CatMedicamentsRepository;
+use App\Repository\GroupsMedicRepository;
 use App\Repository\MedicamentRepository;
+use App\Repository\SymptomeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,21 +25,23 @@ class HomeController extends AbstractController
      * @param MedicamentRepository $repository
      *
      */
-public function index(MedicamentRepository $repository)
-{
+    public function index(MedicamentRepository $repoMedics, GroupsMedicRepository $repoGroups, SymptomeRepository $repoSymptomes, CatMedicamentsRepository $repoCats)
+    {
 
-    //$usertest = $this->getUser()->getId();
-    //var_dump($usertest);
+        if (!$this->getUser()->getFamille()) {
+            return $this->redirectToRoute("dash.familles.init");
+        }
 
-    if(!$this->getUser()->getFamille()){
-        return $this->redirectToRoute("dash.familles.init");
-    }
-    //var_dump($this->getUser()->getFamille());
-    $medicament = $repository->findLatest($this->getUser()->getFamille());
+        $medicaments = $repoMedics->findLatest($this->getUser()->getFamille());
+        $groups = $repoGroups->findAllForUser($this->getUser()->getFamille());
+        $cats = $repoCats->findAllForUser($this->getUser()->getFamille());
+        $symptomes = $repoSymptomes->findAllForUser($this->getUser()->getFamille());
     return $this->render('pages/home.html.twig', [
         "current_menu" => "home",
-        "medicaments" => $medicament,
-        //"user" => $usertest
+        "medicaments" => $medicaments,
+        "symptomes" => $symptomes,
+        "categories" => $cats,
+        "groups" => $groups
     ]);
 
 }

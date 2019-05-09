@@ -102,6 +102,7 @@ class Medicament
      */
     private $catMedicament;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\GroupsMedic", inversedBy="medicaments")
      * @ORM\JoinColumn(nullable=true)

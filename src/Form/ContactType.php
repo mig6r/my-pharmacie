@@ -20,7 +20,9 @@ class ContactType extends AbstractType
             ->add('lastname',TextType::class)
             ->add('phone', TextType::class)
             ->add('email',EmailType::class)
-            ->add('message',TextareaType::class)
+            ->add('message',TextareaType::class, [
+                'attr' => ['rows' => '10']
+            ])
             ;
 
     }

@@ -37,28 +37,28 @@
             {{ form_start(form, {'attr': {'class':'login100-form validate-form'}}) }}
 
             {{ form_errors(form.email, {'attr':{'class':'icon error'}}) }}
-            <div class="wrap-input100 validate-input m-b-18">
+            <div class="wrap-input100 m-b-18">
                 <span class="labelMail icon email"></span>
                 {{ form_widget(form.email, {'attr':{'class':'input100', 'placeholder':'Email'}}) }}
                 <span class="focus-input100"></span>
             </div>
 
             {{ form_errors(form.username, {'attr':{'class':'icon error'}}) }}
-            <div class="wrap-input100 validate-input m-b-18">
+            <div class="wrap-input100 m-b-18">
                 <span class="label icon username"></span>
                 {{  form_widget(form.username, {'attr':{'class':'input100', 'placeholder':"Nom d'utilisateur"}}) }}
                 <span class="focus-input100"></span>
             </div>
 
             {{ form_errors(form.plainPassword.first, {'attr':{'class':'icon error'}}) }}
-            <div class="wrap-input100 validate-input m-b-18">
+            <div class="wrap-input100 m-b-18">
                 <span class="label icon password"></span>
                 {{  form_widget(form.plainPassword.first, {'attr':{'class':'input100', 'placeholder':'Mot de passe'}}) }}
                 <span class="focus-input100"></span>
             </div>
 
             {{ form_errors(form.plainPassword.second, {'attr':{'class':'icon error'}}) }}
-            <div class="wrap-input100 validate-input m-b-40">
+            <div class="wrap-input100 m-b-40">
                 <span class="label icon password"></span>
                 {{  form_widget(form.plainPassword.second, {'attr':{'class':'input100', 'placeholder':'Confirmation du mot de passe'}}) }}
                 <span class="focus-input100"></span>

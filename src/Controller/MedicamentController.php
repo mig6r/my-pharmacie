@@ -43,9 +43,14 @@ class MedicamentController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
+        if(!$this->getUser()->getFamille()){
+            return $this->redirectToRoute("dash.familles.init");
+        }
         //On ajoute le formulaire de recherche et on le passe en argument à la requette
         $search = new MedicamentFilter();
-        $form = $this->createForm(MedicamentFilterType::class, $search);
+        $form = $this->createForm(MedicamentFilterType::class, $search, [
+            'famille' => $this->getUser()->getFamille()
+        ]);
         $form->handleRequest($request);
 
         //on récupère la requette SQL dans le repository
@@ -72,6 +77,9 @@ class MedicamentController extends AbstractController
      */
     public function detail($slug, Medicament $medicament): Response
     {
+        if(!$this->getUser()->getFamille()){
+            return $this->redirectToRoute("dash.familles.init");
+        }
         //$medicament = $this->repository->find($id);
         ///*A la place de mettre $id en argument et de faire une recherche avec la méthode find comme ci-dessus,
         /// on peut faire une injection de l'entity Medicament, etant donné que symfony trouve un id, symfony va faire

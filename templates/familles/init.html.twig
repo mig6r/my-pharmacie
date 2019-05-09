@@ -2,7 +2,17 @@
 
 {% block title "Initialisation de la famille" %}
 {% block body %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Bienvenue
+                <small class="text-muted">sur votre pharmacie personnelle</small>
+            </h1>
+            <p class="lead text-primary">Afin d'utiliser votre pharmarcie, vous devez dans un premier temps, créer ou
+                rejoindre une
+                famille.</p>
+        </div>
 
+    </div>
 
     <div class="container mt-4">
         {% for message in app.flashes('success') %}
@@ -16,28 +26,20 @@
             </div>
         {% endfor %}
 
-        <div class="row">
-            <h1>Initialisation de votre famille</h1>
-        </div>
-        <h2>Bienvenue sur votre pharmacie personnelle</h2>
-        <p>Afin de pouvoir utiliser votre pharmarcie, vous devez dans un premier temps, créer ou rejoindre une
-            famille.<br>
-            Tous les éléments que vous créerez ensuite seront associés à cette famille.
-        </p>
-
 
         <div class="row mt-4">
             <div class="col-md-12">
                 <h3>Créer votre famille</h3>
             </div>
 
-            <div class="col-md-12">
-                <p>Vous êtes l'administrateur de votre famille et pourrez par la suite inviter d'autre personnes à vous
+            <div class="col-md-12 pb-4">
+                <p class="text-success">Vous êtes l'administrateur de votre famille et pourrez par la suite inviter
+                    d'autre personnes à vous
                     rejoindre</p>
             </div>
         </div>
         {{ form_start(create) }}
-        <div class="row">
+        <div class="form-row">
             <div class="col">
                 {{ form_row(create.name) }}
             </div>
@@ -50,31 +52,26 @@
 
 
         <div class="row mt-4">
-            <div class="col-md-12">
+            <div class="col-md-12 ">
                 <h3>Rejoignez une famille</h3>
             </div>
             <div class="col-md-12">
-                <p>Si un code vous a été fourni pour rejoindre une famille, vous êtes ici au bon endroit</p>
+                <p class="text-success pb-4">Si un code vous a été fourni pour rejoindre une famille, vous pouvez le saisir ici</p>
             </div>
         </div>
         <form method="post" action="{{ path('dash.familles.join') }}">
-        <div class="row">
-            <div class="col">
-
-                    <div class="form-group">
-                        <input type="text" id="token" name="token" placehoder="Token" class="form-control">
-                        <input type="hidden" name="_method" value="JOIN">
-                        <input type="hidden" name="_token" value="{{ csrf_token('join' ~ app.user.id) }}">
-                    </div>
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" id="token" name="token" placeholder="Saisissez votre code" class="form-control">
+                    <input type="hidden" name="_method" value="JOIN">
+                    <input type="hidden" name="_token" value="{{ csrf_token('join' ~ app.user.id) }}">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary">Rejoindre</button>
+                </div>
 
             </div>
-            <div class="col">
-
-                <button class="btn btn-primary">Rejoindre</button>
-            </div>
-
-        </div>
-    </form>
+        </form>
     </div>
 
 {% endblock %}
