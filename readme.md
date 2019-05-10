@@ -1,4 +1,4 @@
-# ⚕ Managing your personal Pharmacy ⚕
+# ⚕ Manage your personal Pharmacy ⚕
 My first Symfony 4 project.
 
 Design with bootstrap and using webPack encore
@@ -29,6 +29,16 @@ Coming soon
 
 ## ⚙ Install
 
+### 📐 Edit the .env file (or add an env.local)
+
+* Link to the database
+>DATABASE_URL=mysql://USERNAME:PASSWORD@127.0.0.1:3306/NEWDBNAME
+* Congiure mailer
+>MAILER_URL=smtp://USERNAME:PASSWORD@SERVER_ADRESS:PORT?timeout=60&encryption=ENCRYPTION_METHOD&auth_mode=login
+* Api keys for contact form
+>GOOGLE_RECAPTCHA_KEY=your_key
+>GOOGLE_RECAPTCHA_SECRET=your_secret_key
+
 ###  📦 Installing dependencies and build
 
 ```bash
@@ -47,7 +57,6 @@ encore dev
 
 ###  🗃 Create the database
 
-* Edit your ".env" file to populate your database login information (you can use an additional ".env.local" file)
 
 * Create your database with Doctrine :
 

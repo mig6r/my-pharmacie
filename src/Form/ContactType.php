@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use Mig\RecaptchaBundle\Type\RecaptchaSubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -23,6 +24,10 @@ class ContactType extends AbstractType
             ->add('message',TextareaType::class, [
                 'attr' => ['rows' => '10']
             ])
+            ->add('captcha', RecaptchaSubmitType::class,[
+                'label' => 'Envoyer',
+                'attr' => ['class' => 'btn btn-primary']
+            ])
             ;
 
     }
@@ -31,7 +36,8 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class,
-            'translation_domain' => 'forms'
+            'translation_domain' => 'forms',
+            "allow_extra_fields" => true
         ]);
     }
 

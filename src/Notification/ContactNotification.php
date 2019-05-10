@@ -33,7 +33,7 @@ class ContactNotification
 
     public function notify(Contact $contact)
     {
-        $message = (new \Swift_Message("Message en provenance du site Médicaments"))
+        $message = (new \Swift_Message("Message en provenance de My Pharmacy"))
             ->setFrom('s.opros@digimig.fr')
             ->setTo('s.opros@digimig.fr')
             ->setReplyTo($contact->getEmail())
