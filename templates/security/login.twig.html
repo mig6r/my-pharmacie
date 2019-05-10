@@ -35,10 +35,10 @@
             {% endif %}
             {% for message in app.flashes('success') %}
             <div class="alert alert-success mb-0 rounded-0">
-                <p class="text-center text-uppercase font-weight-bold text-success">
+            <p class="text-center text-uppercase font-weight-bold text-success">
                 {{ message }}
-                </p>
-            </div>
+            </p>
+        </div>
             {% endfor %}
             <form class="login100-form" action="{{ path('login')}}" method="post">
                 <input type="hidden" name="_csrf_token"
@@ -65,7 +65,7 @@
                     </div>
 
                     <div>
-                        <a href="{{ path('page.register')}}" class="txt1">
+                        <a href="{{ path('request.resetting')}}" class="txt1">
                             Mot de passe perdu ?
                         </a>
                     </div>

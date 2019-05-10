@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Réinitialisation du mot de passe{% endblock %}</title>
+
+    {% block stylesheets %}  {{ encore_entry_link_tags('app') }}{% endblock %}
+
+    {% form_theme form with ['foundation_5_layout.html.twig'] only %}
+
+</head>
+
+<body>
+
+
+
+
+
+<div class="limiter">
+
+    <div class="container-login100">
+
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url('{{ asset('build/images/bg-02.jpg') }}');">
+					<span class="login100-form-title-1">
+						Réinitialisation du mot de passe
+					</span>
+            </div>
+            {%  if not form.vars.valid %}
+                <div class="alert alert-danger mb-0 rounded-0">
+                    <p class="text-center text-uppercase font-weight-bold text-danger">
+                        Des erreurs sont présentes sur votre formulaire
+                    </p>
+                </div>
+            {% endif %}
+
+            {{ form_start(form, {'attr': {'class':'login100-form validate-form'}}) }}
+
+            {{ form_errors(form.email, {'attr':{'class':'icon error'}}) }}
+            <div class="wrap-input100 m-b-18">
+                <span class="labelMail icon email"></span>
+                {{ form_widget(form.email, {'attr':{'class':'input100', 'placeholder':'Email'}}) }}
+                <span class="focus-input100"></span>
+            </div>
+
+
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn">
+                    Envoyer la demande
+                </button>
+            </div>
+            {{  form_rest(form) }}
+            {{  form_end(form) }}
+            <div>
+                <div style="float:right; margin-right: 20px; margin-bottom: 20px">
+                    <a href="{{ path('login')}}" class="txt1">
+                        <span class="icon loginUser"> Oups, en fait j'ai retrouvé mon mot de passe</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('build/app.js') }}"></script>
+{% block javascripts %}  {{ encore_entry_script_tags('app') }}{% endblock %}
+
+
+</body>
+</html>
