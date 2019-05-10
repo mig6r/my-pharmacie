@@ -33,10 +33,11 @@ Coming soon
 
 * Link to the database
 >DATABASE_URL=mysql://USERNAME:PASSWORD@127.0.0.1:3306/NEWDBNAME
-* Congiure mailer
+* Configure mailer
 >MAILER_URL=smtp://USERNAME:PASSWORD@SERVER_ADRESS:PORT?timeout=60&encryption=ENCRYPTION_METHOD&auth_mode=login
 * Api keys for contact form
 >GOOGLE_RECAPTCHA_KEY=your_key
+
 >GOOGLE_RECAPTCHA_SECRET=your_secret_key
 
 ###  📦 Installing dependencies and build
