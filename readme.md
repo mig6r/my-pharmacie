@@ -29,11 +29,21 @@ Coming soon
 
 ## ⚙ Install
 
-###  📦 Installing dependencies 
+###  📦 Installing dependencies and build
 
 ```bash
 composer install
 ```
+
+```bash
+yarn install
+```
+
+```bash
+encore dev
+```
+
+
 
 ###  🗃 Create the database
 
@@ -47,13 +57,27 @@ php bin/console doctrine:database:create
 
 * Fill in the database :
 
-> Be carreful to remove files in Migration folder before 
+> Be carreful to remove files in src/migration folder before 
 
 ````bash
 php bin/console make:migration
 php bin/console migrate
 
 ````
+
+### 🎉 Start The application
+
+```bash
+php bin/console server:run
+
+```
+
+> Go to http://localhost:8000
+
+> Create your account (No confirmation needed)
+
+> Log In
+
 ## Copyright
 
 This project is licensed under the MIT License - see the [license](LICENSE) file for details.
