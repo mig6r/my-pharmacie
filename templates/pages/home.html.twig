@@ -14,25 +14,17 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <div class="d-inline p-2 pl-5 pr-5 bg-primary text-white rounded">
+        <div class="d-inline p-2 pl-5 pr-5 bg-primary m-4 text-white rounded">
             Mon tableau de bord
         </div>
 
 
-        <div class="row mt-4 mb-2">
-            <div class="col-md-6">
+        <div class="row mt-4">
+            <div class="col-12 col-xl-6 pl-0 pl-md-3 pr-md-0">
                 <div class="bg-primary p-2 text-light">
-                Derniers médicament ajoutés
+                    Derniers médicament ajoutés
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="bg-primary p-2 text-light">
-                Parametres de classification
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+
                 <table class="table table-hover">
                     <thead class="thead-light">
                     <tr>
@@ -46,88 +38,98 @@
 
                     <tbody>
                     {% for element in medicaments %}
-                        <tr class="tablerowhref" data-href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">
-
+                        <tr class="tablerowhref"
+                            data-href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">
 
 
                             <td style="vertical-align: middle">
                                 {% if element.picture %}
-                                <img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumbTableau')}}" alt="table-img">
+                                    <img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumbTableau') }}"
+                                         alt="table-img">
                                 {% endif %}
                             </td>
                             <td style="vertical-align: middle">{% if element.name %}{{ element.name }}{% endif %}</td>
                             <td style="vertical-align: middle">{% if element.catMedicament %} {{ element.catMedicament.name }} {% endif %}</td>
                             <td style="vertical-align: middle">{% if element.GroupMedicament %} {{ element.GroupMedicament.name }} {% endif %}</td>
-                            <td style="vertical-align: middle">{% for symptome in element.Symptomes %} <span class="badge badge-secondary">{{ symptome.name }}</span></br>{% endfor %}</td>
+                            <td style="vertical-align: middle">{% for symptome in element.Symptomes %} <span
+                                        class="badge badge-secondary">{{ symptome.name }}</span></br>{% endfor %}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                <div class="navigation" >
-                    {{ knp_pagination_render(medicaments) }}
+                    <div class="navigation">
+                        {{ knp_pagination_render(medicaments) }}
+                    </div>
                 </div>
             </div>
+
+
+            <div class="col-12 col-xl-6 mt-3 mt-xl-0 pl-0 pl-md-3">
+                <div class="row mx-2 pl-0 pl-0 pl-md-3">
+                    <div class="col-12 bg-primary p-2 text-light">
+                        Parametres de classification
+                    </div>
+
+                    <div class="col-md-4 px-0">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Catégories</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for element in categories %}
+                                <tr>
+
+                                    <td>{{ element.name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="col-md-4 px-0">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Groupes</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for element in groups %}
+                                <tr>
+
+                                    <td>{{ element.name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="col-md-4 px-0">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Symptomes</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for element in symptomes %}
+                                <tr>
+                                    <td>{{ element.name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-2">
-                <table class="table table-hover">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Catégories</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {% for element in categories %}
-                        <tr>
-
-                            <td>{{ element.name }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="col-md-2">
-                <table class="table table-hover">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Groupes</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {% for element in groups %}
-                        <tr>
-
-                            <td>{{ element.name }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="col-md-2">
-                <table class="table table-hover">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Symptomes</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {% for element in symptomes %}
-                        <tr>
-                            <td>{{ element.name }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
 
         </div>
 
