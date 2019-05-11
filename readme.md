@@ -6,7 +6,7 @@ Design with bootstrap and using webPack encore
 
 ## 🎨 Demo
 
-Coming soon
+<https://pharmacy.digimig.fr>
 
 ## 💊 Features
 

@@ -1,6 +1,7 @@
 security:
         access_denied_url: /
         # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+        always_authenticate_before_granting: true
         providers:
 
             #in_memory: { memory: ~ }

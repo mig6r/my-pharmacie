@@ -10,14 +10,14 @@
 
 
             <div class="row align-middle">
-                <div class="col-lg-10 text-center ">
+                <div class="col-lg-9 text-center ">
                     <span class="align-middle">
                     <h2 class="mb-2">{{ medicament.name }}</h2>
-                        <span class=" nav-item nav-link badge badge-secondary">{{ medicament.catMedicament.name }}</span>
-                        <span class=" nav-item nav-link badge badge-secondary">{{ medicament.groupMedicament.name }}</span>
+                        <span class=" nav-item nav-link badge badge-secondary">{% if medicament.catMedicament %} {{ medicament.catMedicament.name }}{% endif %}</span>
+                        <span class=" nav-item nav-link badge badge-secondary">{% if medicament.catMedicament %} {{ medicament.groupMedicament.name }}{% endif %}</span>
                     </span>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3 d-flex justify-content-end">
                     {% if medicament.picture %}
                         <img src="{{ vich_uploader_asset(medicament, 'imageFile') | imagine_filter('thumb') }}"
                              alt="card-img-top ">
