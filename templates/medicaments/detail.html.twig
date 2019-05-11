@@ -4,20 +4,60 @@
     {{ medicament.name }}
 {% endblock %}
 
-{%  block body %}
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                {%  if medicament.picture %}
-                    <img src="{{ vich_uploader_asset(medicament, 'imageFile') | imagine_filter('medium')}}" alt="card-img-top ">
-                {% else %}
-                    <img src="{{ '/images/medicaments/empty.jpg' | imagine_filter('thumb')}}" alt="card-img-top" style="width: 100%; height:auto;">
-                {% endif %}
+{% block body %}
+    <div class="container mt-5">
+        <div class="shadow p-4 bg-light rounded border" style="min-height: 650px">
+
+
+            <div class="row align-middle">
+                <div class="col-lg-10 text-center ">
+                    <span class="align-middle">
+                    <h2 class="mb-2">{{ medicament.name }}</h2>
+                        <span class=" nav-item nav-link badge badge-secondary">{{ medicament.catMedicament.name }}</span>
+                        <span class=" nav-item nav-link badge badge-secondary">{{ medicament.groupMedicament.name }}</span>
+                    </span>
+                </div>
+                <div class="col-lg-2">
+                    {% if medicament.picture %}
+                        <img src="{{ vich_uploader_asset(medicament, 'imageFile') | imagine_filter('thumb') }}"
+                             alt="card-img-top ">
+                    {% else %}
+                        <img src="{{ '/images/medicaments/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top"
+                             style="width: 100%; height:auto;">
+                    {% endif %}
+                </div>
             </div>
-            <div class="col-md-8">
-                <h1>{{ medicament.name }}</h1>
-                <div class="text-primary">{{ medicament.description }}</div>
+
+
+            <div class="row">
+                <div class="col-lg-10">
+                    <nav class="mb-3 ">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                               role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                               role="tab" aria-controls="nav-profile" aria-selected="false">Commentaire</a>
+
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                             aria-labelledby="nav-home-tab">{{ medicament.description |nl2br }}</div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                            {{ medicament.commentaires |nl2br }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-5 text-center">
+                    <h6>Symptomes</h6>
+                    <div class="dropdown-divider"></div>
+                    {% for symptome in medicament.Symptomes %} <span class="badge badge-success">{{ symptome.name }}</span></br>{% endfor %}
+                </div>
+
             </div>
         </div>
+
     </div>
 {% endblock %}

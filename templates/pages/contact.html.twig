@@ -3,8 +3,11 @@
 {% block body %}
 
 
-    <div class="container mt-4">
-    <h1>Contactez nous</h1>
+    <div class="container mt-5">
+    <div class="shadow p-4 bg-light rounded border">
+        <h1>Contactez <small class="text-muted"> nous</small></h1>
+        <div class="bb-15"></div>
+
         {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
@@ -51,5 +54,6 @@
 
 
         </div>
+    </div>
     </div>
 {% endblock %}

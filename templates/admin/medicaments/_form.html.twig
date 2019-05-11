@@ -1,5 +1,46 @@
 {{ form_start(form) }}
 
+<div class="row mb-4 pt-4">
+    <div class="col-lg-6 col-sm-10 col-10 mb-4">
+        <span class="text-primary pb-2"> {{ form_label(form.name) }}</span>
+        {{ form_widget(form.name) }}
+    </div>
+    <div class="col-lg-2 col-sm-2 col-2 mb-4 pt-4">
+
+        {{ form_row(form.enable) }}
+    </div>
+
+    <div class="col-lg-4 mb-2">
+        <span class="text-primary"> {{ form_label(form.GroupMedicament) }}</span>
+        {{ form_widget(form.GroupMedicament) }}
+    </div>
+
+    <div class="col-lg-8 mb-4">
+        <span class="text-primary"> {{ form_label(form.imageFile) }}</span>
+        {{ form_widget(form.imageFile) }}
+    </div>
+    <div class="col-lg-4 mb-4">
+        <span class="text-primary"> {{ form_label(form.catMedicament) }}</span>
+        {{ form_widget(form.catMedicament) }}
+    </div>
+
+    <div class="col-lg-8 mb-2">
+        <span class="text-primary"> {{ form_label(form.description) }}</span>
+
+        {{ form_widget(form.description, {'attr':{'rows':'10'}}) }}
+    </div>
+    <div class="col-lg-4 mb-2">
+        <span class="text-primary"> {{ form_label(form.commentaires) }}</span>
+
+        {{ form_widget(form.commentaires, {'attr':{'rows':'10'}}) }}
+    </div>
+    <div class="col mb-2">
+        <span class="text-primary"> {{ form_label(form.symptomes) }}</span>
+
+        {{ form_widget(form.symptomes) }}
+    </div>
+</div>
+
 {{ form_rest(form) }}
 
 <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>

@@ -1,14 +1,12 @@
-{%  extends "base.html.twig" %}
+{% extends "base.html.twig" %}
 
-{%  block title %}Edition : {{ medicament.name }}{% endblock %}
+{% block title %}Ajout d'un médicament{% endblock %}
 {% block body %}
 
 
-    <div class="container mt-4">
-       <div class="shadow p-5 bg-light rounded border">
-        <h1>Ajout du médicament</h1>
+    {{ include ('admin/_entete.html.twig', {action:'Ajout',type:'du médicament'}) }}
 
-        {{ include('admin/medicaments/_form.html.twig') }}
+    {{ include('admin/medicaments/_form.html.twig') }}
     </div>
     </div>
 

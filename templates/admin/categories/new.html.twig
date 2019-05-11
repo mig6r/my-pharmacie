@@ -4,11 +4,11 @@
 {% block body %}
 
 
-    <div class="container mt-4">
-        <h1>Ajout d'une catégorie</h1>
+    {{ include ('admin/_entete.html.twig', {action:'Ajout',type:'de la catégorie'}) }}
 
         {{ include('admin/categories/_form.html.twig') }}
 
+    </div>
     </div>
 
 

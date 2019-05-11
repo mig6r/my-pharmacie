@@ -40,7 +40,7 @@ class ResettingController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
 
-            // voir l'épisode 2 de cette série pour retrouver la méthode loadUserByUsername:
+
             $user = $em->getRepository(User::class)->loadUserByUsername($form->getData()['email']);
 
             // aucun email associé à ce compte.

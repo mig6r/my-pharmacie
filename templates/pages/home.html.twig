@@ -47,10 +47,17 @@
                     <tbody>
                     {% for element in medicaments %}
                         <tr class="tablerowhref" data-href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">
-                            <td style="vertical-align: middle"><img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumbTableau')}}" alt="table-img"></td>
-                            <td style="vertical-align: middle">{{ element.name }}</td>
-                            <td style="vertical-align: middle">{{ element.catMedicament.name }}</td>
-                            <td style="vertical-align: middle">{{ element.GroupMedicament.name }}</td>
+
+
+
+                            <td style="vertical-align: middle">
+                                {% if element.picture %}
+                                <img src="{{ vich_uploader_asset(element, 'imageFile') | imagine_filter('thumbTableau')}}" alt="table-img">
+                                {% endif %}
+                            </td>
+                            <td style="vertical-align: middle">{% if element.name %}{{ element.name }}{% endif %}</td>
+                            <td style="vertical-align: middle">{% if element.catMedicament %} {{ element.catMedicament.name }} {% endif %}</td>
+                            <td style="vertical-align: middle">{% if element.GroupMedicament %} {{ element.GroupMedicament.name }} {% endif %}</td>
                             <td style="vertical-align: middle">{% for symptome in element.Symptomes %} <span class="badge badge-secondary">{{ symptome.name }}</span></br>{% endfor %}</td>
                         </tr>
                     {% endfor %}

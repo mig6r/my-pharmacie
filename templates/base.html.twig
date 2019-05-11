@@ -1,85 +1,102 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}  {{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block stylesheets %}  {{ encore_entry_link_tags('app') }}{% endblock %}
 
 
+</head>
 
-    </head>
+<body>
+{% if user is defined %}
+    {% for element in user %}
+        {{ element }}
+    {% endfor %}
+{% endif %}
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <body>
-    {% if user is defined %}
-{% for element in user %}
-{{ element }}
-{% endfor %}
-    {% endif %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == "home" %}active{% endif %}" href="/">Accueil</a>
-                </li>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if current_menu is defined and current_menu == "home" %}active{% endif %}"
+                   href="/">Accueil</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% if app.user.famille %}
-                <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == "medicaments" %}active{% endif %}" href="/dash/medicaments">Liste des médicaments </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if current_menu is defined and current_menu == "medicaments" %}active{% endif %}"
+                           href="/dash/medicaments">Médicaments </a>
+                    </li>
                 {% endif %}
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "ma_famille" or current_menu =="mon_compte" ) %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "ma_famille" or current_menu =="mon_compte" ) %}active{% endif %}"
+                       href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
                         {{ app.user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "mon_compte" %}active{% endif %}" href="#">Mon compte</a>
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "ma_famille" %}active{% endif %}" href="{{ path("dash.familles.index") }}">Ma famille</a>
+                        <a class="dropdown-item {% if current_menu is defined and current_menu == "mon_compte" %}active{% endif %}"
+                           href="#">Mon compte</a>
+                        <a class="dropdown-item {% if current_menu is defined and current_menu == "ma_famille" %}active{% endif %}"
+                           href="{{ path("dash.familles.index") }}">Ma famille</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path("logout") }}">Deconnexion</a>
                     </div>
                 </li>
-                {% endif %}
-
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                {% if app.user.roles.0 == 'ROLE_ADMIN' %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu =="admin_symptomes" or current_menu =="admin_categories" or current_menu =="admin_groups") %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administration
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_medicaments" %}active{% endif %}" href="{{ path("admin.medicaments.index") }}">Médicaments</a>
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_symptomes" %}active{% endif %}" href="{{ path("admin.symptome.index") }}">Symptomes</a>
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_categories" %}active{% endif %}" href="{{ path("admin.categories.index") }}">Catégories </a>
-                        <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_groups" %}active{% endif %}" href="{{ path("admin.groups.index") }}">Groupes</a>
-                    </div>
-                </li>
-                {% endif %}
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == "contact" %}active{% endif %}" href="/contact">Contact</a>
-                </li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            {% if app.user %}
-            <a href="{{ path("logout") }}" class="btn btn-primary ml-4">Déconnexion</a>
             {% endif %}
-        </div>
-    </nav>
 
-        {% block body %}{% endblock %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% if app.user.roles.0 == 'ROLE_ADMIN' %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu =="admin_symptomes" or current_menu =="admin_categories" or current_menu =="admin_groups") %}active{% endif %}"
+                           href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_medicaments" %}active{% endif %}"
+                               href="{{ path("admin.medicaments.index") }}">Médicaments</a>
+                            <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_symptomes" %}active{% endif %}"
+                               href="{{ path("admin.symptome.index") }}">Symptomes</a>
+                            <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_categories" %}active{% endif %}"
+                               href="{{ path("admin.categories.index") }}">Catégories </a>
+                            <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_groups" %}active{% endif %}"
+                               href="{{ path("admin.groups.index") }}">Groupes</a>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link {% if current_menu is defined and current_menu == "contact" %}active{% endif %}"
+                   href="/contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <div style="float:right;">
+        <form class="form-inline my-2 my-lg-0 lg-only">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form></div>
+        {% if app.user %}
+            <a href="{{ path("logout") }}" class="btn btn-primary ml-4">Déconnexion</a>
+        {% endif %}
+
+</nav>
+
+{% block body %}{% endblock %}
 
 
-    <script src="{{ asset('build/app.js') }}"></script>
- {% block javascripts %}  {{ encore_entry_script_tags('app') }}{% endblock %}
+<script src="{{ asset('build/app.js') }}"></script>
+{% block javascripts %}  {{ encore_entry_script_tags('app') }}{% endblock %}
 
 
-    </body>
+</body>
 </html>

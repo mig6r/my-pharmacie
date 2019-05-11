@@ -4,11 +4,11 @@
 {% block body %}
 
 
-    <div class="container mt-4">
-        <h1>Edition du groupe {{ groups_medic.name }}</h1>
+    {{ include ('admin/_entete.html.twig', {action:'Edition',type:'du groupe'}) }}
 
         {{ include('admin/groups/_form.html.twig', {form: form, button: 'Editer'}) }}
 
+    </div>
     </div>
 
 

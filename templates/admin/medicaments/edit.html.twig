@@ -4,11 +4,14 @@
 {% block body %}
 
 
-    <div class="container mt-4">
-        <h1>Edition du médicament {{ medicament.name }}</h1>
+    <div class="container mt-5">
+        <div class="shadow p-4 bg-light rounded border">
+            <h1>Edition <small class="text-muted"> du médicament</small></h1>
+            <div class="bb-15"></div>
 
         {{ include('admin/medicaments/_form.html.twig', {form: form, button: 'Editer'}) }}
 
+    </div>
     </div>
 
 
