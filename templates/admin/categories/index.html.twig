@@ -5,7 +5,7 @@
 
 
 <div class="container mt-4">
-    <h1>Gestion des catégories de médicaments</h1>
+    <h1 class="mb-4">Gestion <small class="text-muted"> des catégories de médicaments</small></h1>
 
 
     {% for message in app.flashes('success') %}
@@ -34,7 +34,7 @@
                 {{ element.name }}
             </td>
             <td>
-                <a href="{{ path("admin.categories.edit", {id: element.id}) }}" class="btn btn-secondary">Editer</a>
+                <a href="{{ path("admin.categories.edit", {id: element.id}) }}" class="btn btn-secondary">Modifier</a>
                 <form method="post" action="{{ path('admin.categories.delete', {id: element.id}) }}" style="display: inline-block"  onsubmit="return confirm('Vous êtes sur le point de supprimer une catégorie')">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ element.id) }}">

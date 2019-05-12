@@ -1,10 +1,10 @@
 {%  extends "base.html.twig" %}
 
-{%  block title %}Edition : {{ symptome.name }}{% endblock %}
+{%  block title %}Ajout d'un symptome{% endblock %}
 {% block body %}
 
 
-    {{ include ('admin/_entete.html.twig', {action:'Ajout',type:'du symtome'}) }}
+    {{ include ('admin/_entete.html.twig', {action:'Ajout',type:'du symptome'}) }}
 
         {{ include('admin/symptomes/_form.html.twig') }}
 

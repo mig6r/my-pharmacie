@@ -4,8 +4,10 @@
 {% block body %}
 
 
-<div class="container mt-4">
-    <h1>Gestion des symptomes</h1>
+<div class="container mt-4 ">
+    <h1 class="mb-4">Gestion <small class="text-muted"> des symptomes</small></h1>
+
+
 
 
     {% for message in app.flashes('success') %}
@@ -34,7 +36,7 @@
                 {{ element.name }}
             </td>
             <td>
-                <a href="{{ path("admin.symptome.edit", {id: element.id}) }}" class="btn btn-secondary">Editer</a>
+                <a href="{{ path("admin.symptome.edit", {id: element.id}) }}" class="btn btn-secondary">Modifier</a>
                 <form method="post" action="{{ path('admin.symptome.delete', {id: element.id}) }}" style="display: inline-block"  onsubmit="return confirm('Vous êtes sur le point de supprimer un médicament')">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ element.id) }}">
