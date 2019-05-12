@@ -14,12 +14,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 class MedicamentFilter
 {
     /**
-     * @var int|null
+     * @var object
      */
     private $catMedic;
 
     /**
-     * @var int|null
+     * @var object
      */
     private $groupMedic;
 
@@ -33,26 +33,27 @@ class MedicamentFilter
         $this->symptomes = new ArrayCollection();
     }
 
+
     /**
-     * @return int
+     * @return object
      */
-    public function getCatMedic(): ?int
+    public function getCatMedic(): ?object
     {
         return $this->catMedic;
     }
 
     /**
-     * @param int $catMedic
+     * @param $catMedic
      */
-    public function setCatMedic(int $catMedic): void
+    public function setCatMedic(object $catMedic)
     {
         $this->catMedic = $catMedic;
     }
 
     /**
-     * @return int
+     * @return object
      */
-    public function getGroupMedic(): ?int
+    public function getGroupMedic(): ?object
     {
         return $this->groupMedic;
     }
@@ -60,7 +61,7 @@ class MedicamentFilter
     /**
      * @param int $groupMedic
      */
-    public function setGroupMedic(int $groupMedic): void
+    public function setGroupMedic(object $groupMedic): void
     {
         $this->groupMedic = $groupMedic;
     }

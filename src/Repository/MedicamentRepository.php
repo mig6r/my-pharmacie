@@ -45,7 +45,7 @@ class MedicamentRepository extends ServiceEntityRepository
         if ($search->getCatMedic()){
 
             $query = $query
-                ->andWhere('m.id_cat = :catmedic')
+                ->andWhere('m.catMedicament = :catmedic')
                 ->setParameter('catmedic', $search->getCatMedic());
             $where="andwhere";
         }
@@ -53,7 +53,7 @@ class MedicamentRepository extends ServiceEntityRepository
         if ($search->getGroupMedic()){
 
             $query = $query
-                ->andWhere('m.id_group = :groupmedic')
+                ->andWhere('m.GroupMedicament = :groupmedic')
                 ->setParameter('groupmedic', $search->getGroupMedic());
 
         }
