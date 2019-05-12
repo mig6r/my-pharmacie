@@ -37,6 +37,7 @@ class GroupsMedicType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GroupsMedic::class,
+            'translation_domain' => 'forms',
         ])->setRequired('famille');
     }
 }

@@ -38,6 +38,7 @@ class CatMedicamentsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => CatMedicaments::class,
+            'translation_domain' => 'forms',
         ])->setRequired('famille');
     }
 }

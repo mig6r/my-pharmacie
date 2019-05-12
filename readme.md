@@ -72,6 +72,7 @@ php bin/console doctrine:database:create
 ````bash
 php bin/console make:migration
 php bin/console migrate
+php bin/console doctrine:fixtures:load --append
 
 ````
 

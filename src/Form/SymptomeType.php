@@ -37,6 +37,7 @@ class SymptomeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Symptome::class,
+            'translation_domain' => 'forms',
         ])->setRequired('famille');
     }
 }

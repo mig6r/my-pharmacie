@@ -9,9 +9,16 @@
 namespace App\Controller;
 
 
+use App\AutoInsertDatas\OptionsFamily;
+use App\Entity\CatMedicaments;
 use App\Entity\Famille;
+use App\Entity\GroupsMedic;
+use App\Entity\GroupsMedicModel;
 use App\Entity\User;
+use App\Repository\CatMedicamentsModelRepository;
 use App\Repository\FamilleRepository;
+use App\Repository\GroupsMedicModelRepository;
+use App\Repository\GroupsMedicRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,7 +73,9 @@ class FamilleController extends AbstractController
      * @return Response
      * @Route("/dash/familles/init", name="dash.familles.init", methods="POST|GET")
      */
-    public function new(Request $request, ObjectManager $em, FamilleRepository $repository, TokenGeneratorInterface $tokenGenerator)
+    public function new(Request $request, ObjectManager $em, FamilleRepository $repository,
+                        TokenGeneratorInterface $tokenGenerator, GroupsMedicModelRepository $repositoryGroup,
+CatMedicamentsModelRepository $respositoryCat)
     {
         $famille = new Famille();
         $repositoryUser = $this->getDoctrine()->getRepository(User::class);
@@ -81,15 +90,32 @@ class FamilleController extends AbstractController
 
 
         if ($create->isSubmitted() && $create->isValid()) {
+            //$newGroups = ['Enfants','Adultes','Tout public'];
+
             $famille->setToken($tokenGenerator->generateToken());
             $famille->setAdmin($user);
             $em->persist($famille);
             $em->flush();
             $user->setFamille($famille);
-            //$roles=['ROLE_ADMIN'];
+
+            $groups = $repositoryGroup->findAll();
+            $cats = $respositoryCat->findAll();
+            foreach($groups as $group){
+                $groupMedic = new GroupsMedic();
+                $groupMedic->setFamille($famille);
+                $groupMedic->setName($group->getName());
+                $em->persist($groupMedic);
+            }
+
+            foreach($cats as $cat){
+                $catMedic = new CatMedicaments();
+                $catMedic->setFamille($famille);
+                $catMedic->setName($cat->getName());
+                $em->persist($catMedic);
+            }
+
             $user->setRoles(['ROLE_ADMIN']);
             $em->flush();
-            //$this->addFlash('success', 'Votre famille ' . $famille->getName() . ' a bien été créée');
             return $this->redirectToRoute("dash.familles.index");
         }
 

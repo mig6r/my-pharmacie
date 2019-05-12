@@ -50,7 +50,7 @@
                     </td>
                     <td>
                         {% if element == famille.admin %}
-                            <span class="badge badge-pill badge-warning">Admin Princpal</span>
+                            <span class="badge badge-pill badge-warning">Admin Principal</span>
                         {% else %}
 
                             {% if element.roles.0 == 'ROLE_USER' %}
@@ -88,9 +88,8 @@
                                     </form>
                                 {% endif %}
 
-                            {% else %}
-                                Vous êtes l'administrateur principal
                             {% endif %}
+
 
                         </td>
                     {% endif %}

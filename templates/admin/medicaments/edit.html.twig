@@ -1,6 +1,6 @@
 {%  extends "base.html.twig" %}
 
-{%  block title %}Edition : {{ medicament.name }}{% endblock %}
+{%  block title %}Modification : {{ medicament.name }}{% endblock %}
 {% block body %}
 
 
@@ -9,7 +9,7 @@
             <h1>Edition <small class="text-muted"> du médicament</small></h1>
             <div class="bb-15"></div>
 
-        {{ include('admin/medicaments/_form.html.twig', {form: form, button: 'Editer'}) }}
+        {{ include('admin/medicaments/_form.html.twig', {form: form, button: 'Modifier'}) }}
 
     </div>
     </div>
