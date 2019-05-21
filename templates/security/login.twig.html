@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73239-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-73239-10');
+    </script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Bienvenue sur l'application de gestion des médicaments{% endblock %}</title>
@@ -24,7 +35,7 @@
         <div class="wrap-login100">
             <div class="login100-form-title" style="background-image: url('{{ asset('build/images/bg-02.jpg') }}');">
 					<span class="login100-form-title-1">
-						Sign In
+						Me connecter
 					</span>
             </div>
             {% if error %}
@@ -74,14 +85,14 @@
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        Login
+                        Connection
                     </button>
                 </div>
             </form>
             <div>
                 <div style="float:right; margin-right: 20px; margin-bottom: 20px">
                     <a href="{{ path('page.register')}}" class="txt1">
-                        <span class="icon register"> Créer votre compte</span>
+                        <span class="icon register"> Créer mon compte</span>
                     </a>
                 </div>
             </div>

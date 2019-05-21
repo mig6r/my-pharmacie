@@ -1,0 +1,15 @@
+{%  extends "base.html.twig" %}
+
+{%  block title %}Ajout d'un emplacement{% endblock %}
+{% block body %}
+
+
+    {{ include ('admin/_entete.html.twig', {action:'Ajout',type:'d\'un emplacement'}) }}
+
+        {{ include('admin/locations/_form.html.twig') }}
+
+    </div>
+    </div>
+
+
+{% endblock %}

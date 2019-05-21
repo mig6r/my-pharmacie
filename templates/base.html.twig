@@ -57,10 +57,10 @@
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% if app.user.roles.0 == 'ROLE_ADMIN' %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu =="admin_symptomes" or current_menu =="admin_categories" or current_menu =="admin_groups") %}active{% endif %}"
+                        <a class="nav-link dropdown-toggle {% if current_menu is defined and (current_menu == "admin_medicaments" or current_menu == "admin_symptomes" or current_menu == "admin_categories" or current_menu == "admin_groups" or current_menu == "admin_locations") %}active{% endif %}"
                            href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
-                            Administration
+                            Configuration
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_medicaments" %}active{% endif %}"
@@ -71,6 +71,8 @@
                                href="{{ path("admin.categories.index") }}">Catégories </a>
                             <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_groups" %}active{% endif %}"
                                href="{{ path("admin.groups.index") }}">Groupes</a>
+                            <a class="dropdown-item {% if current_menu is defined and current_menu == "admin_locations" %}active{% endif %}"
+                               href="{{ path("admin.locations.index") }}">Emplacements</a>
                         </div>
                     </li>
                 {% endif %}

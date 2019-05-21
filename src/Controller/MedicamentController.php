@@ -11,7 +11,9 @@ namespace App\Controller;
 
 use App\Entity\Medicament;
 use App\Entity\MedicamentFilter;
+use App\Entity\Products;
 use App\Form\MedicamentFilterType;
+use App\Form\ProductType;
 use App\Repository\MedicamentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
@@ -63,6 +65,8 @@ class MedicamentController extends AbstractController
             10
         );
 
+
+
         return $this->render("medicaments/index.html.twig", [
             "current_menu" => "medicaments",
             "medicaments" => $medicament,
@@ -75,7 +79,7 @@ class MedicamentController extends AbstractController
      * @Route("/dash/medicaments/{slug}-{id}", name="dash.medicament.detail", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function detail($slug, Medicament $medicament): Response
+    public function detail($slug, Medicament $medicament, Request $request): Response
     {
         if(!$this->getUser()->getFamille()){
             return $this->redirectToRoute("dash.familles.init");
@@ -84,6 +88,8 @@ class MedicamentController extends AbstractController
         ///*A la place de mettre $id en argument et de faire une recherche avec la méthode find comme ci-dessus,
         /// on peut faire une injection de l'entity Medicament, etant donné que symfony trouve un id, symfony va faire
         /// la recherche à notre place
+$newProduct = new Products();
+        //$form = $this->createForm(ProductType::class, $medicament);
 
         if ($medicament->getSlug() !== $slug) {
             return $this->redirectToRoute("dash.medicament.detail", [
@@ -91,10 +97,26 @@ class MedicamentController extends AbstractController
                 "slug" => $medicament->getSlug()
             ], 301);
         }
+        $form = $this->createForm(ProductType::class, $newProduct, [
+            'famille' => $this->getUser()->getFamille(),
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $newProduct->setFamille($this->getUser()->getFamille());
+            $newProduct->setMedicament($medicament);
+            $newProduct->setQuantity($medicament->getQuantity());
+            $newProduct->setInitialQuantity($medicament->getQuantity());
+            $this->em->persist($newProduct);
+            $this->em->flush();
+            $this->addFlash('success', 'Le médicament a bien été ajouté');
+            //return $this->redirectToRoute("admin.medicaments.detail");
+        }
+
         return $this->render("medicaments/detail.html.twig", [
             "medicament" => $medicament,
             "current_menu" => "medicaments",
-            "slug" => $slug
+            "slug" => $slug,
+            "form" => $form->createView()
         ]);
     }
 

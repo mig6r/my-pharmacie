@@ -7,12 +7,14 @@ use App\Entity\Famille;
 use App\Entity\GroupsMedic;
 use App\Entity\Medicament;
 use App\Entity\Symptome;
+
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,7 +26,10 @@ class MedicamentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
         $famille = $options['famille'];
+
         $builder
             /*
             ->add('famille', EntityType::class, [
@@ -45,8 +50,8 @@ class MedicamentType extends AbstractType
 
 
             //->add('picture', FileType::class)
-                ->add('imageFile', FileType::class, [
-                  'required' => false
+            ->add('imageFile', FileType::class, [
+                'required' => false
             ])
             /*
             ->add('famille', HiddenType::class, [
@@ -68,7 +73,7 @@ class MedicamentType extends AbstractType
             ->add('commentaires')
             ->add('catMedicament', EntityType::class, [
                 'class' => CatMedicaments::class,
-                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                'query_builder' => function (EntityRepository $er) use ($famille) {
                     return $er->createQueryBuilder('u')
                         ->where('u.famille = :famille')
                         ->setParameter('famille', $famille);
@@ -79,10 +84,9 @@ class MedicamentType extends AbstractType
                 'required' => false
 
             ])
-
             ->add('GroupMedicament', EntityType::class, [
                 'class' => GroupsMedic::class,
-                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                'query_builder' => function (EntityRepository $er) use ($famille) {
                     return $er->createQueryBuilder('g')
                         ->where('g.famille = :famille')
                         ->setParameter('famille', $famille);
@@ -91,10 +95,9 @@ class MedicamentType extends AbstractType
                 'placeholder' => '',
                 'required' => false
             ])
-
             ->add('symptomes', EntityType::class, [
                 'class' => Symptome::class,
-                'query_builder' => function (EntityRepository $er ) use ($famille) {
+                'query_builder' => function (EntityRepository $er) use ($famille) {
                     return $er->createQueryBuilder('u')
                         ->where('u.famille = :famille')
                         ->setParameter('famille', $famille);
@@ -102,8 +105,28 @@ class MedicamentType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false
-            ])
-        ;
+            ]);
+        if ($builder->getData()) {
+            if ($builder->getData()->getQuantity() === -1) {
+                $builder
+                    ->add('quantity', TextType::class, [
+                        'help' => 'Laisser vide pour ne pas gérer la quantité',
+                        'required' => false,
+                        'data' => null,
+                        'empty_data' => -1
+                    ]);
+                return;
+            };
+
+            $builder
+                ->add('quantity', TextType::class, [
+                    'help' => 'Laisser vide pour ne pas gérer la quantité',
+                    'required' => false,
+                    'empty_data' => -1
+                ]);
+
+
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -117,13 +140,13 @@ class MedicamentType extends AbstractType
     public function getTypes()
     {
         $types = Medicament::TYPES;
-       sort ($types);
+        sort($types);
 
-       /* $output = [];
-        foreach ($types  as $key => $value)
-        {
-            $output[$value] = $key;
-        }*/
+        /* $output = [];
+         foreach ($types  as $key => $value)
+         {
+             $output[$value] = $key;
+         }*/
         return array_flip($types);
     }
 }

@@ -7,12 +7,20 @@
 
 }
 
+.register{
+  font-size: 16px;
+}
+
+.loginUser{
+  font-size: 16px;
+}
+
 .register::before {
-  font-family: "FontAwesome"; font-weight: 300; content: "\f234"; font-size: 22px;
+  font-family: "FontAwesome"; font-weight: 300; content: "\f234"; font-size: 26px;
 }
 
 .loginUser::before {
-  font-family: "FontAwesome"; font-weight: 300; content: "\f2bd"; font-size: 22px;
+  font-family: "FontAwesome"; font-weight: 300; content: "\f2bd"; font-size: 26px;
 }
 
 .username::before {
@@ -29,6 +37,14 @@
 
 .email::before {
   font-family: "FontAwesome"; font-weight: 300; content: "\f1fa"; font-size: 40px; color: #b1dfbb; padding-right: 10px;
+}
+
+.folder::before {
+  font-family: "FontAwesome"; font-weight: 300; content: "\f07c"; font-size: 26px;
+}
+
+.trash::before {
+  font-family: "FontAwesome"; font-weight: 300; content: "\f1f8"; font-size: 15px;
 }
 
 .error{

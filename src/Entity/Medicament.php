@@ -115,6 +115,16 @@ class Medicament
      */
     private $famille;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="medicament", orphanRemoval=true)
+     */
+    private $products;
+
 
 
 
@@ -122,6 +132,7 @@ class Medicament
     {
         $this->created_at = new \DateTime();
         $this->symptomes = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,6 +324,49 @@ class Medicament
     public function setFamille(?Famille $famille): self
     {
         $this->famille = $famille;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Products[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Products $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setMedicament($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Products $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getMedicament() === $this) {
+                $product->setMedicament(null);
+            }
+        }
 
         return $this;
     }

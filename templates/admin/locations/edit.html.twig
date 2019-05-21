@@ -1,0 +1,15 @@
+{%  extends "base.html.twig" %}
+
+{%  block title %}Edition : {{ location.name }}{% endblock %}
+{% block body %}
+
+
+    {{ include ('admin/_entete.html.twig', {action:'Edition',type:'de l\'emplacement'}) }}
+
+        {{ include('admin/locations/_form.html.twig', {form: form, button: 'Modifier'}) }}
+
+    </div>
+    </div>
+
+
+{% endblock %}

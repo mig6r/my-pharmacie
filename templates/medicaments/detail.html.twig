@@ -5,6 +5,18 @@
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="container mt-5">
         <div class="shadow p-4 bg-light rounded border" style="min-height: 650px">
 
@@ -33,7 +45,9 @@
                 <div class="col-lg-10">
                     <nav class="mb-3 ">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-stock"
+                               role="tab" aria-controls="nav-stock" aria-selected="true">Produits</a>
+                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home"
                                role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                role="tab" aria-controls="nav-profile" aria-selected="false">Commentaire</a>
@@ -41,8 +55,99 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                             aria-labelledby="nav-home-tab">{{ medicament.description |nl2br }}</div>
+
+                        <div class="tab-pane fade" id="nav-home" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
+                            {{ medicament.description |nl2br }}
+                        </div>
+
+                        <div class="tab-pane fade show active" id="nav-stock" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
+
+
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Date d'ajout</th>
+                                    <th scope="col">Date d'expiration</th>
+                                    <th scope="col">Emplacement</th>
+                                    <th scope="col" class="text-center">Stock</th>
+                                    <th scop="col" class="text-center">Action</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for product in medicament.products %}
+                                    <tr class="tablerowhref"
+                                        data-href="{{ path('dash.product.edit', {id: product.id }) }}">
+                                        <td>{{ product.createdAt|localizeddate('none', 'none', null, null, "d MMMM Y") }}</td>
+                                        <td>{{ product.expire|localizeddate('none', 'none', null, null, "MMMM Y") }}</td>
+                                        <td>{{ product.location.parent.name }} -> {{ product.location.name }}</td>
+                                        <td class="text-center">
+                                            {% if(product.initialQuantity != -1) %}
+                                                {% if(product.quantity ==  product.initialQuantity) %}<span class="badge badge-pill badge-success pt-1">
+                                                {% elseif (product.quantity <  product.initialQuantity / 2)%}<span class="badge badge-pill badge-warning pt-1">
+                                                {% elseif (product.quantity <  product.initialQuantity) %}<span class="badge badge-pill badge-secondary pt-1">
+                                                    {% endif %}
+                                                {{ product.quantity }} / {{ product.initialQuantity }}
+                                                    </span>
+                                            {% else %}
+                                                {{ product.stateName }}
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="text-right">
+                                            <form method="post"
+                                                  action="{{ path('dash.product.substring', {id: product.id}) }}"
+                                                  style="display: inline-block"
+                                                  onsubmit="return confirm('Vous êtes sur le point de diminuer la quantité')">
+                                                <input type="hidden" name="_method" value="SUBSTRING">
+                                                <input type="hidden" name="_token"
+                                                       value="{{ csrf_token('substring' ~ product.id) }}">
+
+                                                    {% if(product.initialQuantity != -1) %}
+                                                <button class="btn btn-primary btn-sm">
+                                                        - 1
+                                                </button>
+                                                    {% else %}
+                                                        {% if(product.state == 0) %}
+                                                            <button class="btn btn-primary btn-sm">
+                                                            Passer à boite ouverte
+                                                            </button>
+                                                            {% elseif (product.state == 1) %}
+                                                                <button class="btn btn-primary btn-sm">
+                                                            Passer à presque vide
+                                                                </button>
+                                                            {% endif %}
+                                                    {% endif %}
+
+                                            </form>
+                                            <form method="post" action="{{ path('dash.product.delete', {id: product.id}) }}"
+                                                  style="display: inline-block"
+                                                  onsubmit="return confirm('Vous êtes sur le point de supprimer le produit')">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token"
+                                                       value="{{ csrf_token('delete' ~ product.id) }}">
+
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <span class="icon trash"></span>
+                                                </button>
+                                            </form>
+
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                    data-target="#ajout">
+                                Ajouter
+                            </button>
+                        </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                             {{ medicament.commentaires |nl2br }}
@@ -53,11 +158,39 @@
                 <div class="col-lg-2 mt-5 text-center">
                     <h6>Symptomes</h6>
                     <div class="dropdown-divider"></div>
-                    {% for symptome in medicament.Symptomes %} <span class="badge badge-success">{{ symptome.name }}</span></br>{% endfor %}
+                    {% for symptome in medicament.Symptomes %} <span
+                            class="badge badge-success">{{ symptome.name }}</span></br>{% endfor %}
                 </div>
 
             </div>
         </div>
 
+    </div>
+
+
+    <div class="modal fade" id="ajout" tabindex="-1" role="dialog" aria-labelledby="Ajout d'un produit"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un produit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    {{ form_start(form) }}
+
+                    {{ form_rest(form) }}
+
+
+                    <button class="btn btn-primary">{{ button|default('Ajouter') }}</button>
+                    {{ form_end(form) }}
+
+                </div>
+
+            </div>
+        </div>
     </div>
 {% endblock %}

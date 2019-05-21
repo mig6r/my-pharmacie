@@ -65,11 +65,15 @@
                                 {% endif %}
 
                                 <div class="card-body">
-
-                                    <h6 class="card-title text-primary">
-                                        <a href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}">{{ element.name }}</a>
-                                    </h6>
-                                    <p class="card-text">{{ element.description }}</p>
+                                    <a href="{{ path('dash.medicament.detail', {id: element.id, slug: element.slug}) }}" class="btn btn-primary">
+                                        {{ element.name }} <span class="badge badge-light">{{ element.products|length }}</span>
+                                    </a>
+                                    <div class="mt-1 text-center">
+                                    {% for symptome in element.Symptomes %} <span class="badge badge-success">{% if loop.index == 1 or loop.index == 2%}{{ symptome.name }}{% endif %}{% if loop.index == 3 %}. . .{% endif %}</span>{% endfor %}
+                                </div>
+                                    <div class=" text-center">
+                                        <span class="badge badge-secondary">{{ element.groupMedicament.name }}</span>
+                                    </div>
                                 </div>
                             </div>
 

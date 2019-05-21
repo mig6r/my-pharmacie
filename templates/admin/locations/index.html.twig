@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+
+{% block title "Gestion des emplacement de médicaments" %}
+{% block body %}
+
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Gestion
+            <small class="text-muted"> des emplacements</small>
+        </h1>
+
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for location in locations %}
+                {% if location.parent == null %}
+                    <tr>
+                        <td>
+                            {{ location.name }}
+                        </td>
+                        <td style="width:30%">
+                            <a href="{{ path("admin.locations.edit", {id: location.id}) }}" class="btn btn-secondary">Modifier</a>
+                            <form method="post" action="{{ path('admin.locations.delete', {id: location.id}) }}"
+                                  style="display: inline-block"
+                                  onsubmit="return confirm('Vous êtes sur le point de supprimer un emplacement')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+<tr>
+                    <td colspan="2" class="pl-5 pr-0">
+
+
+
+                <table class="table table-hover">
+                    {% for slocation in locations %}
+
+                        {% if slocation.parent != null and location == slocation.parent %}
+
+
+
+                            <tr>
+                                <td>
+                                    <span class="icon folder"></span>
+                                </td>
+                                <td>{{ slocation.name }}</td>
+                                <td style="width:28%">
+                                    <a href="{{ path("admin.locations.edit", {id: slocation.id}) }}"
+                                       class="btn btn-secondary">Modifier</a>
+                                    <form method="post"
+                                          action="{{ path('admin.locations.delete', {id: slocation.id}) }}"
+                                          style="display: inline-block"
+                                          onsubmit="return confirm('Vous êtes sur le point de supprimer un emplacement')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ slocation.id) }}">
+                                        <button class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        {% endif %}
+                    {% endfor %}
+                </table>
+
+                    </td>
+                </tr>
+                {% endif %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <a href="{{ path("admin.locations.new") }}" class="btn btn-secondary">Ajouter un emplacement</a>
+        </div>
+    </div>
+
+
+{% endblock %}

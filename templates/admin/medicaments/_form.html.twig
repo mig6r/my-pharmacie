@@ -34,10 +34,16 @@
 
         {{ form_widget(form.commentaires, {'attr':{'rows':'10'}}) }}
     </div>
-    <div class="col mb-2">
+    <div class="col-lg-8 mb-2">
         <span class="text-primary"> {{ form_label(form.symptomes) }}</span>
 
         {{ form_widget(form.symptomes) }}
+    </div>
+    <div class="col-lg-4 mb-2">
+        <span class="text-primary"> {{ form_label(form.quantity) }}</span>
+
+        {{ form_widget(form.quantity) }}
+        <span class="text-primary"> {{ form_help(form.quantity) }}</span>
     </div>
 </div>
 

@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+
+{{ form_rest(form) }}
+
+{% if lock == true %}
+    <div class="mb-3">
+        <p class="text-warning">Vous ne pouvez pas affecter d'emplacement parent car un ou des emplacements sont déja affectés à cet emplacement</p>
+    </div>
+{% endif %}
+<button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+{{ form_end(form) }}

@@ -89,7 +89,6 @@ return $this->render("admin/medicaments/index.html.twig",  [
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
             $this->em->flush();
             $this->addFlash('success', 'Le médicament a bien été modifié');
             return $this->redirectToRoute("admin.medicaments.index");

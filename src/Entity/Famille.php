@@ -61,6 +61,16 @@ class Famille
      */
     private $token;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Locations", mappedBy="famille", orphanRemoval=true)
+     */
+    private $locations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="famille", orphanRemoval=true)
+     */
+    private $products;
+
 
 
 
@@ -77,6 +87,8 @@ class Famille
         $this->symptomes = new ArrayCollection();
         $this->catMedicaments = new ArrayCollection();
         $this->groupsMedics = new ArrayCollection();
+        $this->locations = new ArrayCollection();
+        $this->products = new ArrayCollection();
 
 
 
@@ -276,6 +288,68 @@ class Famille
     public function setToken(string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Locations[]
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Locations $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setFamille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Locations $location): self
+    {
+        if ($this->locations->contains($location)) {
+            $this->locations->removeElement($location);
+            // set the owning side to null (unless already changed)
+            if ($location->getFamille() === $this) {
+                $location->setFamille(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Products[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Products $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setFamille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Products $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getFamille() === $this) {
+                $product->setFamille(null);
+            }
+        }
 
         return $this;
     }

@@ -25,9 +25,11 @@ class MedicamentRepository extends ServiceEntityRepository
     public function findAllForUser($famille)
     {
         return $this->createQueryBuilder('m')
+            ->leftJoin('m.products', 'prod')
             ->andWhere('m.famille = :val')
             ->setParameter('val', $famille)
             ->orderBy('m.name', 'ASC')
+
             ->getQuery()
             ->getResult()
             ;
