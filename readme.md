@@ -17,14 +17,15 @@ Design with bootstrap and using webPack encore
 * Groups drug management
 * Symptoms drug management
 * Filter drug
-
-### Coming up
 * Inventory management
 * Date of expiry
 * Location management
+
+### Coming up
+
 * Medicine Ordinance Management
 * API
-* Add drug with Open-medicaments.fr
+* Add drugs with Open-medicaments.fr
 
 
 ## ⚙ Install

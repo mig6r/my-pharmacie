@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cf9b4e0-caf0-457c-8ea8-fdb580244788" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/my-pharmacy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/my-pharmacy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/awesome.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/awesome.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/AdminMedicamentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/AdminMedicamentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MedicamentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MedicamentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Famille.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Famille.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Medicament.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Medicament.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/MedicamentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MedicamentType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/MedicamentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MedicamentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/categories/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/categories/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/medicaments/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/medicaments/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/medicaments/detail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/medicaments/detail.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/medicaments/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/medicaments/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/renew.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/renew.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/resetting.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/resetting.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.twig.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.twig.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/forms.fr.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/forms.fr.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,14 +91,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/products/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+            <state relative-caret-position="289">
+              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
               <folding>
                 <element signature="e#13#27#0#Twig" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="238">
+                <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -211,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/Form/GroupsMedicType.php" />
         <option value="$PROJECT_DIR$/src/Form/SymptomeType.php" />
         <option value="$PROJECT_DIR$/src/Form/CatMedicamentsType.php" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/assets/css/custom.scss" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
         <option value="$PROJECT_DIR$/assets/css/main.scss" />
@@ -259,6 +247,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Admin/AdminMedicamentController.php" />
         <option value="$PROJECT_DIR$/src/Controller/ProductController.php" />
         <option value="$PROJECT_DIR$/templates/products/edit.html.twig" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -590,12 +579,12 @@
       <workItem from="1558267300693" duration="5012000" />
       <workItem from="1558301399394" duration="4882000" />
       <workItem from="1558333395080" duration="33148000" />
-      <workItem from="1558418464895" duration="32755000" />
+      <workItem from="1558418464895" duration="33389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="619129000" />
+    <option name="totallyTimeSpent" value="619763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -653,7 +642,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/locations/_delete_form.html.twig" />
     <entry file="file://$PROJECT_DIR$/templates/admin/categories/_form.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1030,11 +1018,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/products/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+        <state relative-caret-position="289">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
           <folding>
             <element signature="e#13#27#0#Twig" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="238">
+            <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
